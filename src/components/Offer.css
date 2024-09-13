@@ -31,22 +31,22 @@
 }
 
 .text {
-    width: 90%;
+    width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
     font-size: medium;
     position: relative;
     right: 4rem;
     font-size: medium;
 }
 
+
 .text h2 {
     position: relative;
-    right: 8rem;
+    right: 16rem;
 }
 .text h3 {
     font-size: larger;

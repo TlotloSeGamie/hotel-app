@@ -21,7 +21,9 @@ const Offer = () => {
                 </div>
             </div>
             <div className="middle">
-                <h4><span>What do we offer</span><br />There are many variations of passages</h4>
+                    <div className="text">
+                        <h4><span>What do we offer</span><br />There are many variations of passages</h4>                   
+                     </div>
             </div>
             <div className="bottom">
                 <div className="confortable">
