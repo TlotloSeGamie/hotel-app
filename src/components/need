@@ -1,0 +1,24 @@
+ <input
+                        type="otion"
+                        placeholder="09 Sep 2024"
+                        name="calendar"
+                    />
+                    <input
+                        type="option"
+                        placeholder="20 Sep 2024"
+                        name="calendar"
+                    />
+                    <input
+                        type="option"
+                        placeholder="1 room, 2 guests"
+                        name="guests"
+                    />
+                    <input
+                        type="option"
+                        placeholder="09 Sep 2024"
+                        name="search"
+                    />
+
+
+
+                   
