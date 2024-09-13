@@ -32,11 +32,15 @@
 
 .text {
     width: 100%;
+    width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-size: medium;
+    position: relative;
+    right: 4rem;
     font-size: medium;
     position: relative;
     right: 4rem;
@@ -51,6 +55,14 @@
     font-size: larger;
 }
 
+
+.text h2 {
+    position: relative;
+    right: 16rem;
+}
+.text h3 {
+    font-size: larger;
+}
 .middle {
     display: flex;
     justify-content: center;
@@ -59,7 +71,7 @@
 }
 
 .middle h4 {
-    font-size: 18px; 
+    font-size: 1.2rem; 
     color: #333; 
 }
 
@@ -86,7 +98,6 @@
 .bottom {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem; 
     text-align: center;
     justify-items: center; 
     position: relative;

@@ -28,6 +28,9 @@ const Offer = () => {
                     </div>
                     <div className="line"></div>
                 </div>
+                    <div className="text">
+                        <h4><span>What do we offer</span><br />There are many variations of passages</h4>                   
+                     </div>
             </div>
             <div className="bottom">
                 <div className="confortable">

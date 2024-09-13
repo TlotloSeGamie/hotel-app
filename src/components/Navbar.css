@@ -3,6 +3,7 @@
   width: 100%;
   height: auto;
   background-color: #fffffffc;
+  transition: all 0.3s ease; 
 }
 
 .nav-container {
@@ -17,8 +18,17 @@
 .nav-container img {
   width: 10rem;
   height: auto;
+  transition: all 0.3s ease; 
 }
-  
+
+.shrink .nav-container {
+  padding: 0.5rem 0; 
+}
+
+.shrink img {
+  width: 7rem; 
+}
+
 a {
   text-decoration: none;
   color: black;
@@ -31,4 +41,6 @@ ul {
   gap: 2rem;
 }
 
-
+.logins {
+  margin-right: 1rem;
+}
