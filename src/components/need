@@ -224,3 +224,20 @@ const Rooms = () => {
 };
 
 export default Rooms;
+
+.social-icons {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons a {
+    color: #ecf0f1;
+    font-size: 28px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #1abc9c; /* Highlight color on hover */
+    transform: scale(1.1);
+}

@@ -68,6 +68,7 @@ const Rooms = () => {
                     </div>
                 </div>
             ))}
+            <div className="button">SEE ALL SUITES</div>
         </div>
     );
 };

@@ -1,32 +1,30 @@
 .nav-top {
   position: fixed;
   width: 100%;
-  height: auto;
-  background-color: #fffffffc;
-  transition: all 0.3s ease; 
+  top: 0;
+  left: 0;
+  background-color: #ffff;
+  transition: all 0.3s ease;
+  z-index: 1000; 
 }
 
 .nav-container {
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  position: sticky;
-  overflow: hidden;
-  top: 0;
-}
+  align-items: center;}
 
 .nav-container img {
   width: 10rem;
   height: auto;
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
 }
 
 .shrink .nav-container {
-  padding: 0.5rem 0; 
+  padding: 0.5rem 0;
 }
 
 .shrink img {
-  width: 7rem; 
+  width: 7rem;
 }
 
 a {
@@ -44,3 +42,5 @@ ul {
 .logins {
   margin-right: 1rem;
 }
+
+
