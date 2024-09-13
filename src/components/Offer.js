@@ -21,7 +21,13 @@ const Offer = () => {
                 </div>
             </div>
             <div className="middle">
-                <h4><span>What do we offer</span><br />There are many variations of passages</h4>
+                <div className="line-text">
+                    <div className="line"></div>
+                    <div className="mid-text">
+                        <h4><span>What do we offer</span><br />There are many variations of passages</h4>
+                    </div>
+                    <div className="line"></div>
+                </div>
             </div>
             <div className="bottom">
                 <div className="confortable">
@@ -62,3 +68,4 @@ const Offer = () => {
 };
 
 export default Offer;
+
