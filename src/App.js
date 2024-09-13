@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Offer from './components/Offer';
 import Register from './components/Register';
+import Rooms from './components/Rooms';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Navbar />
       <Home />
       <Offer />
+      <Rooms />
     </div>
   );
 }

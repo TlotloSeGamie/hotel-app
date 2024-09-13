@@ -22,3 +22,205 @@
 
 
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M2 17h20v2H2zm11.84-9.21c.1-.24.16-.51.16-.79 0-1.1-.9-2-2-2s-2 .9-2 2c0 .28.06.55.16.79C6.25 8.6 3.27 11.93 3 16h18c-.27-4.07-3.25-7.4-7.16-8.21z"/></svg><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M2 17h20v2H2zm11.84-9.21c.1-.24.16-.51.16-.79 0-1.1-.9-2-2-2s-2 .9-2 2c0 .28.06.55.16.79C6.25 8.6 3.27 11.93 3 16h18c-.27-4.07-3.25-7.4-7.16-8.21z"/></svg>
+
+
+
+                    .rooms-container {
+                        display: flex;
+                        flex-wrap: wrap;
+                        width: 100%;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 2rem;
+                    }
+                    
+                    .rooms-display {
+                        display: flex;
+                        flex-wrap: wrap;
+                        padding: 2rem;
+                    }
+                    
+                    .image {
+                        width: 100%;
+                        height: auto;
+                    }
+                    
+                    img {
+                        width: 100%;
+                        height: auto;
+                    }
+                    
+                    .room {
+                        background-color: brown;
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        height: auto;
+                        gap: 2rem;
+                    }
+                    
+                    .name {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    
+                    .btn {
+                        width: 20rem;
+                        height: 3rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: large;
+                        font-weight: bold;
+                        border: 0.2rem solid black;
+                        border-radius: 1.2rem;
+                        background-color: #fff;
+                    }
+                    
+                    .button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    
+                    .icon-style {
+                        color: grey;
+                        font-size: 3rem;
+                        top: 0.5rem;
+                    }
+                    
+                    .name h4 {
+                        font-size: 3rem;
+                    }
+                    
+                    .bed {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    
+                    .bed h5 {
+                        font-size: 2rem;
+                    }
+                      
+           
+                    import "./Rooms.css"
+import executive from "../images/executive suite/I-Resort-Crete-Gold-Double-Room-Sea-View-1.jpg";
+import setai from "../images/rooms/1-credit-the-setai-miami-beach.jpg";
+import royal from "../images/rooms/16._Royal_Suite_bedroom.jpg";
+import modern from "../images/rooms/960x0.webp";
+import classic from "../images/rooms/1099796_circle.jpg";
+import forest from "../images/rooms/40919557-768x512-1.jpeg";
+import vinnale from "../images/rooms/featureimage-luxury-hotel-bed.jpg";
+import starl from "../images/rooms/images (1).jpeg";
+import modernlux from "../images/rooms/modern-luxury-bedroom-suite-and-bathroom-with-working-table-scaled.jpg";
+import atlantisroyal from "../images/rooms/most-expensive-hotels-atlantis-the-royal-dubai-luxe-digital-780x520.jpg";
+import butterfly from "../images/rooms/south-beach-camps-bay-deluxe-suite-mobile-1.jpg";
+import dimsy from "../images/rooms/The-Details-That-Matter-Top-Things-Every-Luxury-Hotel-Room-Should-Have.png";
+import bachel from "../images/rooms/The-Residence-Hotel-Accommodation-Luxury-Suite.webp";
+import { FaBath, FaBed } from "react-icons/fa";
+
+const Rooms = () => {
+    return (
+        <div className="rooms-container">
+            <div className="rooms-display">
+                <div className="room">
+                    <div className="image">
+                        <img src={executive} />
+                    </div>
+                    <div className="name">
+                        <h4>Executive Suite</h4>
+                        <h4>R3,215/ night</h4>
+                    </div>
+                    <div className="bed">
+                        <h5><FaBath className="icon-style"/> 1 Bathroom</h5>
+                        <h5><FaBed  className="icon-style"/> 1 Bedroom</h5>
+                    </div>
+                    <div className="button">
+                        <button className="btn">Book now</button>
+                    </div>
+                    <div className="image">
+                        <img src={executive} />
+                    </div>
+                    <div className="name">
+                        <h4>Executive Suite</h4>
+                        <h4>R3,215/ night</h4>
+                    </div>
+                    <div className="bed">
+                        <h5><FaBath className="icon-style"/> 1 Bathroom</h5>
+                        <h5><FaBed  className="icon-style"/> 1 Bedroom</h5>
+                    </div>
+                    <div className="button">
+                        <button className="btn">Book now</button>
+                    </div><div className="image">
+                        <img src={executive} />
+                    </div>
+                    <div className="name">
+                        <h4>Executive Suite</h4>
+                        <h4>R3,215/ night</h4>
+                    </div>
+                    <div className="bed">
+                        <h5><FaBath className="icon-style"/> 1 Bathroom</h5>
+                        <h5><FaBed  className="icon-style"/> 1 Bedroom</h5>
+                    </div>
+                    <div className="button">
+                        <button className="btn">Book now</button>
+                    </div><div className="image">
+                        <img src={executive} />
+                    </div>
+                    <div className="name">
+                        <h4>Executive Suite</h4>
+                        <h4>R3,215/ night</h4>
+                    </div>
+                    <div className="bed">
+                        <h5><FaBath className="icon-style"/> 1 Bathroom</h5>
+                        <h5><FaBed  className="icon-style"/> 1 Bedroom</h5>
+                    </div>
+                    <div className="button">
+                        <button className="btn">Book now</button>
+                    </div><div className="image">
+                        <img src={executive} />
+                    </div>
+                    <div className="name">
+                        <h4>Executive Suite</h4>
+                        <h4>R3,215/ night</h4>
+                    </div>
+                    <div className="bed">
+                        <h5><FaBath className="icon-style"/> 1 Bathroom</h5>
+                        <h5><FaBed  className="icon-style"/> 1 Bedroom</h5>
+                    </div>
+                    <div className="button">
+                        <button className="btn">Book now</button>
+                    </div><div className="image">
+                        <img src={executive} />
+                    </div>
+                    <div className="name">
+                        <h4>Executive Suite</h4>
+                        <h4>R3,215/ night</h4>
+                    </div>
+                    <div className="bed">
+                        <h5><FaBath className="icon-style"/> 1 Bathroom</h5>
+                        <h5><FaBed  className="icon-style"/> 1 Bedroom</h5>
+                    </div>
+                    <div className="button">
+                        <button className="btn">Book now</button>
+                    </div><div className="image">
+                        <img src={executive} />
+                    </div>
+                    <div className="name">
+                        <h4>Executive Suite</h4>
+                        <h4>R3,215/ night</h4>
+                    </div>
+                    <div className="bed">
+                        <h5><FaBath className="icon-style"/> 1 Bathroom</h5>
+                        <h5><FaBed  className="icon-style"/> 1 Bedroom</h5>
+                    </div>
+                    <div className="button">
+                        <button className="btn">Book now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+};
+
+export default Rooms;
