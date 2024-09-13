@@ -5,6 +5,7 @@
     align-items: center;
     width: 100%;
     height: auto;
+    background-color: #fff;
 }
 
 .top {
@@ -47,7 +48,48 @@
     text-align: center;
 }
 
+.middle h4 {
+    font-size: 18px; 
+    color: #333; 
+}
+
+.middle h4 span {
+    font-weight: bold;
+    font-size: 24px; 
+    color: #000; 
+}
+
+
+.middle h4::after {
+    content: '';
+    display: block;
+    width: 5rem;
+    background-color: #000;
+}
+
 .bottom {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; 
     text-align: center;
+    justify-items: center; 
+    position: relative;
+    top: 2rem;
+    width: 100%; 
+}
+
+.bottom img {
+    width: 20%;
+    margin-bottom: 1rem; 
+}
+
+.bottom h5 {
+    font-size: 16px; 
+    line-height: 1.5; 
+    max-width: 300px; 
+}
+
+.bottom h5 u {
+    font-weight: bold;
+    font-size: 18px; 
 }
