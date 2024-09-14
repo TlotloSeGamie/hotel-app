@@ -1,4 +1,9 @@
-/* Existing styles */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 .rooms-container {
     display: flex;
@@ -102,4 +107,21 @@
     background-color: #0282c3;
 }
 
+.line {
+    background-color: #0282c3;
+    width: 30%;
+    height: 0.2rem;
+}
 
+.lines {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin-bottom: 0;
+}
+
+.lines h2 {
+    display: flex;
+    font-size: 3rem;
+}

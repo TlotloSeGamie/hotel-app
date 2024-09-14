@@ -1,0 +1,18 @@
+.Checkout-container {
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+}
+
+.check-img {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    top: 9rem;
+}
+
+img {
+    width: 100%;
+}

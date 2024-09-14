@@ -39,6 +39,10 @@ ul {
   gap: 2rem;
 }
 
+a:hover {
+  color: #0282c3;
+}
+
 .logins {
   margin-right: 1rem;
 }

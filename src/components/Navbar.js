@@ -7,7 +7,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {  // Adjust this value as per your needs
+      if (window.scrollY > 50) {  
         setShrink(true);
       } else {
         setShrink(false);

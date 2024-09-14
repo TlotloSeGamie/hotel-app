@@ -49,26 +49,33 @@ const Rooms = () => {
     ];
 
     return (
-        <div className="rooms-container">
-            {roomData.map((room, index) => (
-                <div className="room-card" key={index}>
-                    <div className="image-container">
-                        <img src={room.image} alt={room.name} />
-                    </div>
-                    <div className="room-content">
-                        <div className="name">
-                            <h4>{room.name}</h4>
-                            <h4>{room.price}</h4>
+        <div className="main">
+            <div className="lines">
+                <hr className="line"></hr>
+                <h2>Top Apartments</h2>
+                <hr className="line"></hr>
+            </div>
+            <div className="rooms-container">
+                {roomData.map((room, index) => (
+                    <div className="room-card" key={index}>
+                        <div className="image-container">
+                            <img src={room.image} alt={room.name} />
                         </div>
-                        <div className="bed">
-                            <h5><FaBath className="icon-style" /> {room.bathroom}</h5>
-                            <h5><FaBed className="icon-style" /> {room.bedroom}</h5>
+                        <div className="room-content">
+                            <div className="name">
+                                <h4>{room.name}</h4>
+                                <h4>{room.price}</h4>
+                            </div>
+                            <div className="bed">
+                                <h5><FaBath className="icon-style" /> {room.bathroom}</h5>
+                                <h5><FaBed className="icon-style" /> {room.bedroom}</h5>
+                            </div>
+                            <button className="btn">Book now</button>
                         </div>
-                        <button className="btn">Book now</button>
                     </div>
-                </div>
-            ))}
-            <div className="button">SEE ALL SUITES</div>
+                ))}
+                <div className="button">SEE ALL SUITES</div>
+            </div>
         </div>
     );
 };

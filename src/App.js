@@ -1,5 +1,7 @@
 import './App.css';
+import Checkout from './components/Checkout';
 import Footer from './components/Footer';
+import Gallery from './components/Gallery';
 import Home from './components/Home';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
@@ -10,11 +12,13 @@ import Rooms from './components/Rooms';
 function App() {
   return (
     <div className="App">
-      <Navbar />
+     { /* <Navbar />
       <Home />
       <Offer />
       <Rooms />
-      <Footer />
+      <Footer /> 
+      <Gallery />*/}
+      <Checkout /> 
     </div>
   );
 }
