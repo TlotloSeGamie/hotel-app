@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Offer from './components/Offer';
 import Register from './components/Register';
+import Reservation from './components/Reservation';
 import Rooms from './components/Rooms';
 
 function App() {
@@ -17,8 +18,9 @@ function App() {
       <Offer />
       <Rooms />
       <Footer /> 
-      <Gallery />*/}
-      <Checkout /> 
+      <Gallery />
+      <Checkout /> */}
+      <Reservation />
     </div>
   );
 }

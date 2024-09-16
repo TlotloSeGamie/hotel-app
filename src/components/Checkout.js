@@ -70,6 +70,7 @@ const Checkout = () => {
                                  <label className="deposit">
                                     <input
                                         type="radio"
+                                        checked="checked"
                                         name="deposit"
                                     />
                                     <span class="checkmark"></span>R483 (deposit)
