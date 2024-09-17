@@ -20,6 +20,7 @@ import gallery18 from "../images/gallery/I-Resort-Crete-Fitness-600x400.jpg";
 import gallery19 from "../images/gallery/I-Resort-Crete-Main-Bar-Sellas-3-600x400.jpg";
 import gallery20 from "../images/gallery/I-Resort-Crete-Main-Bar-Sellas-4-600x400.jpg";
 import gallery21 from "../images/gallery/I-Resort-Crete-Main-Bar-Sellas-7-600x450.jpg";
+import Footer from "./Footer";
 
 const Gallery = () => {
     return (
@@ -96,6 +97,9 @@ const Gallery = () => {
                 <div className="photos">
                     <img src={gallery21} />
                 </div>
+            </div>
+            <div className="gallery-content">
+                <Footer />
             </div>
         </div>
     )

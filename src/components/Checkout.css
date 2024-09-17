@@ -5,7 +5,7 @@
     font-family: 'Arial', sans-serif;
 }
 
-.check-img {
+.Checkout-container .check-img {
     background-repeat: no-repeat;
     background-attachment: fixed;
     width: 100%;
@@ -15,13 +15,13 @@
     justify-content: center;
 }
 
-img {
+.Checkout-container img {
     width: 100%;
     object-fit: cover;
     height: 100%;
 }
 
-.cheque-container {
+.Checkout-container .cheque-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -29,7 +29,7 @@ img {
     margin-top: 3rem;
 }
 
-.cheq {
+.Checkout-container .cheq {
     width: 30%;
     padding: 1.5rem;
     border: 1px solid #9c9c9c;
@@ -38,20 +38,20 @@ img {
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.reserve {
+.Checkout-container .reserve {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.your h5 {
+.Checkout-container .your h5 {
     font-weight: bold;
     color: #0021f5;
     font-size: 1.2rem;
     margin-bottom: 1rem;
 }
 
-.order h5 {
+.Checkout-container .order h5 {
     font-size: 1rem;
     color: #6a6a6a;
     background-color: #f0f0f0;
@@ -59,49 +59,44 @@ img {
     border-radius: 0.5rem;
 }
 
-.numbers {
+.Checkout-container .numbers {
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
 }
 
-.exe h5 {
+.Checkout-container .exe h5 {
     font-size: 1.1rem;
     color: #333;
 }
 
-.checks {
+.Checkout-container .checks {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     margin-top: 1rem;
 }
 
-.date {
+.Checkout-container .date {
     width: 30%;
     font-size: medium;
     font-weight: lighter;
 }
 
-.checks .in {
+.Checkout-container .checks .in,
+.Checkout-container .checks .out {
     display: flex;
     justify-content: space-around;
     width: 100%;
 }
 
-.checks .out {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-}
-
-.guest {
+.Checkout-container .guest {
     width: 70%;
     display: flex;
     justify-content: space-between;
 }
 
-.guest-info {
+.Checkout-container .guest-info {
     position: relative;
     width: 40%;
     display: flex;
@@ -109,12 +104,12 @@ img {
     left: 7.5rem;
 }
 
-.guest-info h5 {
+.Checkout-container .guest-info h5 {
     font-weight: lighter;
     font-size: medium;
 }
 
-.amount {
+.Checkout-container .amount {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
@@ -122,13 +117,14 @@ img {
     font-weight: bold;
 }
 
-.amount .total, .amount .paid {
+.Checkout-container .amount .total, 
+.Checkout-container .amount .paid {
     font-size: 1rem;
     display: flex;
     justify-content: end;
 }
 
-.info {
+.Checkout-container .info {
     width: 45%;
     padding: 1.5rem;
     background-color: #fff;
@@ -137,22 +133,22 @@ img {
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.contact h4 {
+.Checkout-container .contact h4 {
     font-size: 1.2rem;
     color: #333;
     margin-bottom: 1rem;
 }
 
-.names {
+.Checkout-container .names {
     margin-bottom: 1.5rem;
 }
 
-.names h5 {
+.Checkout-container .names h5 {
     font-size: 1rem;
     margin-bottom: 0.5rem;
 }
 
-.pay-now {
+.Checkout-container .pay-now {
     width: 80%;
     height: auto;
     display: flex;
@@ -162,20 +158,20 @@ img {
     border-radius: 1rem;
 }
 
-.pay-now h5 {
+.Checkout-container .pay-now h5 {
     font-size: 1rem;
     margin: 1rem 0;
     position: relative;
     left: 0.8rem;
 }
 
-.money {
+.Checkout-container .money {
     width: 50%;
     display: flex;
     justify-content: space-evenly;
 }
 
-.pay-now .dot {
+.Checkout-container .pay-now .dot {
     height: 0.8rem;
     width: 0.8rem;
     background-color: #6a6a6a;
@@ -184,13 +180,13 @@ img {
     margin-right: 0.5rem;
 }
 
-.method h3 {
+.Checkout-container .method h3 {
     font-size: 1.2rem;
     color: #333;
     margin-top: 1.5rem;
 }
 
-#payments {
+.Checkout-container #payments {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -200,7 +196,7 @@ img {
     border-radius: 0.5rem;
 }
 
-.statement {
+.Checkout-container .statement {
     background-color: #f0f0f0;
     padding: 0.5rem;
     border-radius: 0.5rem;
@@ -208,23 +204,23 @@ img {
     margin-bottom: 1rem;
 }
 
-.statement h5 {
+.Checkout-container .statement h5 {
     font-size: 0.9rem;
     color: #333;
 }
 
-.agree {
+.Checkout-container .agree {
     display: flex;
     align-items: center;
     gap: 0.3rem;
 }
 
-.agree label {
+.Checkout-container .agree label {
     font-size: 0.9rem;
     margin-left: 0.5rem;
 }
 
-.complete-btn {
+.Checkout-container .complete-btn {
     width: 50%;
     padding: 1rem;
     background-color: #223ffc;
@@ -236,6 +232,6 @@ img {
     transition: background-color 0.3s ease;
 }
 
-.complete-btn:hover {
+.Checkout-container .complete-btn:hover {
     background-color: #0012a0;
 }

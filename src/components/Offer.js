@@ -12,7 +12,7 @@ const Offer = () => {
                 <div className="image">
                     <img src={scndfloor} alt="Scenic view" />
                 </div>
-                <div className="text">
+                <div className="textie">
                     <h2><u>Your escape to luxury</u></h2>
                     <h3>Your Escape to Luxury and Tranquility
                         At Da Gamie Hotel & Resort, we believe in creating experiences that go beyond expectations. Whether you're here for a

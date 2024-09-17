@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Checkout from './components/Checkout';
 import Footer from './components/Footer';
@@ -8,20 +9,26 @@ import Navbar from './components/Navbar';
 import Offer from './components/Offer';
 import Register from './components/Register';
 import Reservation from './components/Reservation';
-import Rooms from './components/Rooms';
+import Suites from './components/Suites';
 
 function App() {
   return (
-    <div className="App">
-     { /* <Navbar />
-      <Home />
-      <Offer />
-      <Rooms />
-      <Footer /> 
-      <Gallery />
-      <Checkout /> */}
-      <Reservation />
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/rooms" element={<Suites />} />
+        <Route path="/" element={<Suites />} />
+        <Route path="/checkout" element={<Checkout />} /> 
+        <Route path="/reservation" element={<Reservation />} />
+        <Route path="/offer" element={<Offer />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/reservation" element={<Reservation />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Router>
   );
 }
 

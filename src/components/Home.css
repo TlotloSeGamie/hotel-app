@@ -1,4 +1,4 @@
-.home-container {
+.home-page .home-container {
     background-image: url(../images/interior.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -7,7 +7,7 @@
     height: 100vh;
 }
 
-.container {
+.home-page .container {
     position: relative;
     width: 100%;
     height: 100%;
@@ -19,7 +19,7 @@
     gap: 10rem;
 }
 
-.check {
+.home-page .check {
     display: flex;
     justify-content: space-evenly;
     gap: 2rem;
@@ -30,14 +30,14 @@
     border-radius: 1rem;
 }
 
-.date-container, .guest-container {
+.home-page .date-container, .home-page .guest-container {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.date-input, .guest-input {
+.home-page .date-input, .home-page .guest-input {
     padding: 0.5rem 2rem;
     padding-left: 3rem;
     border-radius: 2rem;
@@ -47,18 +47,18 @@
     width: 180px;
 }
 
-.date-input::placeholder, .guest-input::placeholder {
+.home-page .date-input::placeholder, .home-page .guest-input::placeholder {
     color: #888;
 }
 
-.calendar-icon {
+.home-page .calendar-icon {
     position: absolute;
     left: 10px;
     color: #000;
     font-size: 1.2rem;
 }
 
-.search-btn {
+.home-page .search-btn {
     color: rgb(0, 0, 0);
     background-color: #ffffff;
     padding: 0.5rem 2rem;
@@ -68,22 +68,30 @@
     font-size: 1rem;
 }
 
-.search-btn:hover {
+.home-page .search-btn:hover {
     background-color: #1c86ee;
 }
 
-.text {
+.home-page .text {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.guest-container {
+.home-page .text h1 {
+    color: #fff;
+}
+
+.home-page .text h3 {
+    color: #fff;
+}
+
+.home-page .guest-container {
     display: flex;
     align-items: center;
 }
 
-.guest-input {
+.home-page .guest-input {
     padding: 0.5rem 2rem;
     border-radius: 2rem;
     border: none;

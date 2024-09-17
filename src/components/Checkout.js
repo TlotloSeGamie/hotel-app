@@ -1,16 +1,18 @@
 import "./Checkout.css";
-import Navbar from "./Navbar";
-import check from "../images/category-page-hotel-resorts-HOTELRES21-003a3718d01346feb614ba07c034b7ae.jpg"
-
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 
 const Checkout = () => {
+    const navigate = useNavigate(); // Initialize navigate function
+
+    const handleCompleteOrder = () => {
+        // Navigate to the reservation page
+        navigate('/reservation');
+    };
+
     return (
-        
         <div className="Checkout-container">
-           {/*} {<Navbar />}
-            <div className="check-img">
-                <img src={check} />
-            </div>*/}
+            {/* Commented out the navbar if it's not needed */}
+            {/* <Navbar /> */}
             <div className="cheque-container">
                 <div className="cheq">
                     <div className="reserve">
@@ -31,8 +33,8 @@ const Checkout = () => {
                                 <h5 className="date">11 Sep 2024</h5>
                             </div>
                             <div className="out">
-                            <h5 className="text">Check out:</h5>
-                            <h5 className="date">12 Sep 2024</h5>
+                                <h5 className="text">Check out:</h5>
+                                <h5 className="date">12 Sep 2024</h5>
                             </div>
                             <div className="guest">
                                 <h5 className="guests">Guests</h5>
@@ -66,51 +68,43 @@ const Checkout = () => {
                         </div>
                         <div className="pay-now">
                             <h5>Amount to Pay now:</h5>
-                             <div className="money">
-                                 <label className="deposit">
-                                    <input
-                                        type="radio"
-                                        checked="checked"
-                                        name="deposit"
-                                    />
-                                    <span class="checkmark"></span>R483 (deposit)
-                                    </label>
-                                    <label className="full">
-                                    <input
-                                        type="radio"
-                                        name="full"
-                                    />
-                                    <span class="checkmark"></span>R3,215 (full)
-                                    </label>
-                             </div>
+                            <div className="money">
+                                <label className="deposit">
+                                    <input type="radio" checked="checked" name="deposit" />
+                                    <span className="checkmark"></span>R483 (deposit)
+                                </label>
+                                <label className="full">
+                                    <input type="radio" name="full" />
+                                    <span className="checkmark"></span>R3,215 (full)
+                                </label>
+                            </div>
                         </div>
 
-                        
                         <div className="method">
                             <h3>PAYMENT METHOD</h3>
                             <select id="payments">
                                 <option value="later">Pay later</option>
                                 <option value="visa">VISA</option>
-                                <option vale="pal">PayPal</option>
+                                <option value="paypal">PayPal</option>
                             </select>
                             <div className="statement">
                                 <h2>VISA icon here</h2>
                                 <h5>Continue completing order with a VISA card</h5>
                             </div>
                             <div className="agree">
-                            <label class="agree">
-                                <input type="checkbox" />
-                                <span class="checkmark"></span> 
+                                <label className="agree">
+                                    <input type="checkbox" />
+                                    <span className="checkmark"></span>
                                     I read and agree to the terms & conditions
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div>
-            <button className="complete-btn">COMPLETE MY ORDER</button>
+                <button className="complete-btn" onClick={handleCompleteOrder}>COMPLETE MY ORDER</button> {/* Updated */}
             </div>
         </div>
-    )
+    );
 };
 
 export default Checkout;
