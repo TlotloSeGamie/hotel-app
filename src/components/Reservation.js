@@ -61,6 +61,26 @@ const Reservation = () => {
                         </div>
                     </div>
                 </div>
+                <div className="complete">
+                    <div className="complte">
+                        <div className="htag-lines">
+                            <div className="line"></div>
+                            <h3 className="res
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            ">RESERVATION COMPLETE</h3>
+                            <div className="line"></div>
+                        </div>
+                        <h5 className="sent">We’ve sent a confirmation email with all the details of your stay.Please verify to continue, If you have any questions or need further assistance, feel free to contact us.
+                        We look forward to providing you with an unforgettable experience!</h5>
+                                        </div>
+                    </div>
             </div>
         </div>
     );

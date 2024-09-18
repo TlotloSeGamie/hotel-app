@@ -1,8 +1,15 @@
 .reserve-container {
     width: 90%;
-    background-color: rgba(110, 110, 110, 0.39);
+    background-color: #fff;
     padding: 2rem;
     font-family: 'Arial', sans-serif;
+}
+
+.ur-reseve {
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 3rem;
 }
 
 .cheq {
@@ -14,11 +21,6 @@
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.reserve {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 .your h5 {
     font-weight: bold;
@@ -127,3 +129,34 @@
     font-weight: bold;
 }
 
+.complete {
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.complte {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 2rem;
+    border: 0.01rem solid;
+}
+
+.res {
+    width: 60%;
+    margin: 0;
+}
+.htag-lines {
+    display: flex;
+    gap: 4rem;
+}

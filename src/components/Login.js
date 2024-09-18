@@ -1,8 +1,27 @@
 import "./Login.css";
+import { useState } from "react";
+import { signIn } from "../redux/authSlice";
+import { useSelector, useDispatch } from "react-redux";
 import logo from "../images/Screenshot-logo.jpg";
 import loginimg from "../images/358884066.jpg";
 
+
+
 const Login = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('')
+
+    const dispatch = useDispatch()
+
+    const handleSignIn = () =>{
+
+        console.log(email)
+        console.log(password)
+
+        dispatch(signIn(email, password))
+    }
+
     return (
         <div className="login-container">
             <div className="login-form">
@@ -22,7 +41,7 @@ const Login = () => {
                         name="password"
                     />
                     <h5>Forgot your password?</h5>
-                    <button className="login-btn">LOGIN</button>
+                    <button className="login-btn" onClick={handleSignIn}>LOGIN</button>
                     <h3>Don't have an account? <span>Sign Up</span></h3>
                     <div className="or">
                         <div className="line-1"></div>

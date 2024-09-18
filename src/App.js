@@ -10,6 +10,7 @@ import Offer from './components/Offer';
 import Register from './components/Register';
 import Reservation from './components/Reservation';
 import Suites from './components/Suites';
+import Allrooms from './components/Allrooms';
 
 function App() {
   return (
@@ -18,16 +19,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/rooms" element={<Suites />} />
-        <Route path="/" element={<Suites />} />
-        <Route path="/checkout" element={<Checkout />} /> 
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/reservation" element={<Reservation />} />
         <Route path="/offer" element={<Offer />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/reservation" element={<Reservation />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/all-rooms" element={<Allrooms />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

@@ -21,10 +21,12 @@ import gallery19 from "../images/gallery/I-Resort-Crete-Main-Bar-Sellas-3-600x40
 import gallery20 from "../images/gallery/I-Resort-Crete-Main-Bar-Sellas-4-600x400.jpg";
 import gallery21 from "../images/gallery/I-Resort-Crete-Main-Bar-Sellas-7-600x450.jpg";
 import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 const Gallery = () => {
     return (
         <div className="main-container">
+        <Navbar />
             <div className="text">
                 <div className="text-line">
                     <hr className="line"></hr>
