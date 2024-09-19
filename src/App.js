@@ -15,7 +15,6 @@ import Allrooms from './components/Allrooms';
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/rooms" element={<Suites />} />
@@ -27,7 +26,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/all-rooms" element={<Allrooms />} />
       </Routes>
-      <Footer />
     </Router>
   );
 }

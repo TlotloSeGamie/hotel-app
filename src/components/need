@@ -241,3 +241,82 @@ export default Rooms;
     color: #1abc9c; /* Highlight color on hover */
     transform: scale(1.1);
 }
+
+
+
+import { createSlice } from '@reduxjs/toolkit';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config/firebase';
+
+const initialState = {
+ user: null,
+ loading: false,
+ error: null
+
+}
+
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    setLoading: (state) => {
+      state.loading = true;
+      state.error = null
+    },
+    setUser: ( state, action ) => {
+      state.user = action.payload;
+      state.loading = false
+    },
+
+    setError: ( state, action ) => {
+      state.error = action.payload;
+      state.loading = false
+    },
+    
+    signUp: ( state, action ) => {
+        state.loading = true;
+        createUserWithEmailAndPassword (auth, action.payload, action.payload).then((userCredential)=> {
+          //state.user = userCredential
+            state.loading = false
+        }).catch((err)=>{
+
+            console.log(err.message)
+        })
+    },
+
+    signIn: ( state, action ) => {
+      signInWithEmailAndPassword (auth, action.payload, action.payload).then(() => {
+        alert("LoggedIn succesfully!")
+      }).catch((err)=>{
+
+        console.log(err.message)
+    })
+    },
+    
+  },
+})
+
+// Action creators are generated for each case reducer function
+export const { signUp, signIn, setLoading } = authSlice.actions
+
+export default authSlice.reducer
+
+
+export const fetchData = () => async (dispatch) => {
+    dispatch(setLoading());
+
+    try {
+        const querySnapshot = await getDocs(collection(db, "test"));
+        const data = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+
+        dispatch(setData(data)); // Dispatch an action to store the data in your Redux state
+    } catch (error) {
+        dispatch(setError(error.message)); // Handle errors by dispatching an error action
+    } finally {
+        dispatch(setLoading(false)); // Optionally dispatch to reset loading state
+    }
+};

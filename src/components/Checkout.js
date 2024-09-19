@@ -1,19 +1,20 @@
 import "./Checkout.css";
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { useNavigate } from "react-router-dom"; 
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Checkout = () => {
-    const navigate = useNavigate(); // Initialize navigate function
+    const navigate = useNavigate(); 
 
     const handleCompleteOrder = () => {
-        // Navigate to the reservation page
         navigate('/reservation');
     };
 
     return (
         <div className="Checkout-container">
-            {/* Commented out the navbar if it's not needed */}
-            {/* <Navbar /> */}
+            {/*<Navbar />*/}  
             <div className="cheque-container">
+                
                 <div className="cheq">
                     <div className="reserve">
                         <div className="your">
@@ -103,6 +104,7 @@ const Checkout = () => {
                 </div>
                 <button className="complete-btn" onClick={handleCompleteOrder}>COMPLETE MY ORDER</button> {/* Updated */}
             </div>
+            <Footer />
         </div>
     );
 };

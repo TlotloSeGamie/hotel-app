@@ -1,3 +1,4 @@
+import Footer from "./Footer";
 import "./Reservation.css";
 
 
@@ -82,6 +83,7 @@ const Reservation = () => {
                                         </div>
                     </div>
             </div>
+            <Footer />
         </div>
     );
 };
