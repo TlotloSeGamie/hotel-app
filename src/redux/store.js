@@ -11,7 +11,5 @@ const rootReducer = combineReducers({
 })
 
 export const store = configureStore({
-  reducer: {
-    auth: rootReducer,
-  },
-})
+  reducer: rootReducer,
+});

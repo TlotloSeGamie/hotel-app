@@ -8,6 +8,7 @@ const initialState = {
   loading: false,
   error: null,
 };
+
 const dbSlice = createSlice({
   name: 'data',
   initialState,
@@ -27,21 +28,17 @@ const dbSlice = createSlice({
   },
 });
 export const { setLoading, setData, setError } = dbSlice.actions;
-
 export default dbSlice.reducer;
 export const fetchData = () => async (dispatch) => {
-    dispatch(setLoading());
-    try {
-        const querySnapshot = await getDocs(
-            collection(db, "allRooms")
-        );
-        const data = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
-        dispatch(setData(data));
-    } catch (error) {
-        dispatch(setError(error.message));
-    }
-    
-}
+  dispatch(setLoading());
+  try {
+    const querySnapshot = await getDocs(collection(db, "allRooms")); 
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    dispatch(setData(data)); 
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+};

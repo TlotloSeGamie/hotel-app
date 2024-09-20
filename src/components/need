@@ -320,3 +320,59 @@ export const fetchData = () => async (dispatch) => {
         dispatch(setLoading(false)); // Optionally dispatch to reset loading state
     }
 };
+
+
+
+,{
+    name: "Pier Suite",
+    price: "R7,880/ night",
+    image: pier,
+    bathroom: "1 Bathroom",
+    bedroom: "1 Bedroom",
+    size: "500 sq. ft. (46 sq. meters)",
+    occupancy: "3 adults or 2 adults and 1 child",
+    bedOptions: "One king-sized bed, with an option for an additional roll away bed upon request",
+    bathroomDetails: "Spacious walk-in rain shower, vanity area with double sinks, and premium toiletries",
+    flooring: "Elegant tiled floors for a modern, clean look",
+    view: "Garden, pool, or mountain views, depending on availability",
+    accessibility: "Wheelchair accessible with widened doorways and an accessible shower option available upon request",
+    highlights: [
+        "King-sized bed with luxurious, high-thread-count linens",
+        "Private balcony offering breathtaking views of the resort or surrounding nature",
+        "Spacious seating area with contemporary furniture, ideal for relaxation or casual meetings",
+        "Modern open layout with sleek décor that creates a tranquil, sophisticated ambiance",
+        "En-suite bathroom with a walk-in rain shower and designer toiletries"
+    ],
+    additionalImages: [
+        additionalImage1,
+        additionalImage2,
+        additionalImage4,
+        additionalImage3
+    ]
+},{
+    name: "Gold Suite Sea View With Private Pool",
+    price: "R9,998.90/ night",
+    image: privatepool,
+    bathroom: "1 Bathroom",
+    bedroom: "1 Bedroom",
+    size: "500 sq. ft. (46 sq. meters)",
+    occupancy: "3 adults or 2 adults and 1 child",
+    bedOptions: "One king-sized bed, with an option for an additional roll away bed upon request",
+    bathroomDetails: "Spacious walk-in rain shower, vanity area with double sinks, and premium toiletries",
+    flooring: "Elegant tiled floors for a modern, clean look",
+    view: "Garden, pool, or mountain views, depending on availability",
+    accessibility: "Wheelchair accessible with widened doorways and an accessible shower option available upon request",
+    highlights: [
+        "King-sized bed with luxurious, high-thread-count linens",
+        "Private balcony offering breathtaking views of the resort or surrounding nature",
+        "Spacious seating area with contemporary furniture, ideal for relaxation or casual meetings",
+        "Modern open layout with sleek décor that creates a tranquil, sophisticated ambiance",
+        "En-suite bathroom with a walk-in rain shower and designer toiletries"
+    ],
+    additionalImages: [
+        additionalImage1,
+        additionalImage2,
+        additionalImage4,
+        additionalImage3
+    ]
+}
