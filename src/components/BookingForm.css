@@ -1,0 +1,50 @@
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .booking-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .booking-form input, .booking-form select {
+    padding: 0.8rem;
+    border: 1px solid #9c9c9c;
+    border-radius: 0.5rem;
+    width: 100%;
+    font-size: 1rem;
+  }
+  
+  .booking-form button {
+    padding: 1rem;
+    background-color: #223ffc;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .booking-form button:hover {
+    background-color: #0012a0;
+  }
+  
+  .success-message {
+    background-color: #e7f4e4;
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+  }
+  
+  .success-message h2 {
+    color: #27ae60;
+  }
+  
+  .success-message p {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  

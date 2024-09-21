@@ -146,7 +146,7 @@
     border-radius: 8px;
     padding: 2rem;
     width: 90%;
-    max-width: 70rem;
+    max-width: 90rem;
     height: 90%;
     position: relative;
     overflow-y: auto;
@@ -165,7 +165,6 @@
 
 .modal-images {
     display: flex;
-    flex-direction: column;
     gap: 1rem;
 }
 
@@ -177,7 +176,8 @@
 
 .additional-images-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 images per row */
+    width: 68%;
+    grid-template-columns: repeat(2, 1fr); 
     gap: 0.5rem;
 }
 
@@ -187,54 +187,72 @@
     border-radius: 8px;
 }
 
-.room-info {
+
+.room-info-main {
+    width: 100%;
+    height: auto;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between; 
+    align-items: flex-start;
+    gap: 2rem; 
+    padding: 2rem;
+}
+
+/* .room-info {
+    flex: 1 1 45%; 
+    min-width: 300px; 
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+} */
+
+.bookings {
+    margin-top: 2rem;
+    background-color: #6666660e;
+    padding: 2rem;
+    border-radius: 2rem;
+}
+
+.booking-dates,
+.guest-details {
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
 }
 
-.room-info h2 {
-    font-size: 1.5rem;
-    margin: 0;
-}
-
-.room-info p, .room-info ul {
-    font-size: 1.2rem;
-    color: #666;
-}
-
-.room-info ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-}
-
-.room-info .btn {
-    background-color: rgb(255, 255, 255);
-    color: #000;
-    border: none;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+label {
+    display: block;
     font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    margin-bottom: 0.5rem;
 }
 
-.room-info .btn:hover {
-    background-color: #0282c3;
-}
-.book-btn {
-    width: 50%;
+input[type="date"],
+input[type="number"] {
+    width: 100%;
     padding: 0.5rem;
-    background-color: #223ffc;
-    color: #fff;
-    border: none;
-    border-radius: 0.5rem;
-    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.note {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 1rem 0;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    background-color: #0282c3;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.book-btn:hover {
-    background-color: #0012a0;
+.btn:hover {
+    background-color: #026499;
 }
+

@@ -6,8 +6,6 @@
 }
 
 .Checkout-container .check-img {
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     width: 100%;
     height: 20vh;
     margin-top: 5rem;
@@ -23,205 +21,26 @@
 
 .Checkout-container .cheque-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
     gap: 2rem;
     margin-top: 3rem;
 }
 
-.Checkout-container .cheq {
-    width: 30%;
-    padding: 1.5rem;
-    border: 1px solid #9c9c9c;
-    border-radius: 1rem;
-    background-color: #fff;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.Checkout-container .reserve {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.Checkout-container .your h5 {
-    font-weight: bold;
-    color: #0021f5;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-.Checkout-container .order h5 {
-    font-size: 1rem;
-    color: #6a6a6a;
-    background-color: #f0f0f0;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-}
-
-.Checkout-container .numbers {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-}
-
-.Checkout-container .exe h5 {
-    font-size: 1.1rem;
-    color: #333;
-}
-
-.Checkout-container .checks {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
-.Checkout-container .date {
-    width: 30%;
-    font-size: medium;
-    font-weight: lighter;
-}
-
-.Checkout-container .checks .in,
-.Checkout-container .checks .out {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-}
-
-.Checkout-container .guest {
-    width: 70%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.Checkout-container .guest-info {
-    position: relative;
-    width: 40%;
-    display: flex;
-    justify-content: space-between;
-    left: 7.5rem;
-}
-
-.Checkout-container .guest-info h5 {
-    font-weight: lighter;
-    font-size: medium;
-}
-
-.Checkout-container .amount {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    font-weight: bold;
-}
-
-.Checkout-container .amount .total, 
-.Checkout-container .amount .paid {
-    font-size: 1rem;
-    display: flex;
-    justify-content: end;
-}
-
-.Checkout-container .info {
+.Checkout-container .cheq, .Checkout-container .info {
     width: 45%;
     padding: 1.5rem;
-    background-color: #fff;
     border: 1px solid #9c9c9c;
     border-radius: 1rem;
+    background-color: #fff;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.Checkout-container .contact h4 {
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 1rem;
-}
-
-.Checkout-container .names {
-    margin-bottom: 1.5rem;
-}
-
-.Checkout-container .names h5 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.Checkout-container .pay-now {
-    width: 80%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #9c9c9c28;
-    border-radius: 1rem;
-}
-
-.Checkout-container .pay-now h5 {
-    font-size: 1rem;
-    margin: 1rem 0;
-    position: relative;
-    left: 0.8rem;
-}
-
-.Checkout-container .money {
-    width: 50%;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.Checkout-container .pay-now .dot {
-    height: 0.8rem;
-    width: 0.8rem;
-    background-color: #6a6a6a;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 0.5rem;
-}
-
-.Checkout-container .method h3 {
-    font-size: 1.2rem;
-    color: #333;
-    margin-top: 1.5rem;
-}
-
-.Checkout-container #payments {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40%;
-    padding: 0.5rem 0.5rem;
-    margin-bottom: 1rem;
-    border-radius: 0.5rem;
-}
-
-.Checkout-container .statement {
-    background-color: #f0f0f0;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.Checkout-container .statement h5 {
-    font-size: 0.9rem;
-    color: #333;
-}
-
-.Checkout-container .agree {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-}
-
-.Checkout-container .agree label {
-    font-size: 0.9rem;
-    margin-left: 0.5rem;
+.Checkout-container .checks, .guest, .amount {
+    margin-top: 1rem;
 }
 
 .Checkout-container .complete-btn {
-    width: 50%;
+    width: 100%;
     padding: 1rem;
     background-color: #223ffc;
     color: #fff;
@@ -234,4 +53,22 @@
 
 .Checkout-container .complete-btn:hover {
     background-color: #0012a0;
+}
+
+.Checkout-container .agree {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 1rem;
+}
+
+.Checkout-container input[type="date"], input[type="number"], input[type="text"], input[type="email"], select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    width: 100%;
+}
+
+.Checkout-container .method {
+    margin-top: 1.5rem;
 }

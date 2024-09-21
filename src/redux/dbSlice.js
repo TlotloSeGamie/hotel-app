@@ -39,6 +39,7 @@ export const fetchData = () => async (dispatch) => {
     }));
     dispatch(setData(data)); 
   } catch (error) {
-    dispatch(setError(error.message));
+    console.log("Error fetching rooms", error);
+    // dispatch(setError(error.message));
   }
 };
