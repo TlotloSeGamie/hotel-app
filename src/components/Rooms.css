@@ -184,7 +184,7 @@
 .additional-image img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 0.5rem;
 }
 
 
@@ -256,3 +256,24 @@ input[type="number"] {
     background-color: #026499;
 }
 
+.room-icons {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 1rem; 
+    margin-top: 1rem; 
+}
+
+.icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: grey;
+    transition: color 0.3s ease;
+}
+
+.icon:hover {
+    color: #0282c3; 
+}
+
+.heart-icon {
+    color: #e63946; 
+}
