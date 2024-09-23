@@ -18,7 +18,7 @@ const Allrooms = () => {
   const [numRooms, setNumRooms] = useState(1);
   const [numChildren, setNumChildren] = useState(0);
   const [filteredRooms, setFilteredRooms] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0); // Add state for the total price
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const { data, loading, error } = useSelector((state) => state.data);
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ const Allrooms = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedRoom(null);
-    setTotalPrice(0); // Reset the total price when modal is closed
+    setTotalPrice(0);
   };
 
   const calculatePrice = () => {
@@ -66,12 +66,16 @@ const Allrooms = () => {
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Days difference
 
       const totalCost = diffDays * selectedRoom.price * numRooms;
-      setTotalPrice(totalCost); // Set the total price
+      setTotalPrice(totalCost);
+      console.log(totalCost);
+      
+    } else {
+      setTotalPrice(0); // Reset total price if dates are not valid
     }
   };
 
   useEffect(() => {
-    calculatePrice(); // Calculate price when check-in, check-out dates, or number of rooms change
+    calculatePrice();
   }, [checkInDate, checkOutDate, numRooms, selectedRoom]);
 
   const handleReserveNow = () => {
@@ -124,7 +128,7 @@ const Allrooms = () => {
             <div className="room-content">
               <div className="name">
                 <h4>{room.name}</h4>
-                <h4>{room.price}</h4>
+                <h4>R{room.price}/ night</h4>
               </div>
               <div className="bed">
                 <h5>
@@ -160,10 +164,8 @@ const Allrooms = () => {
               </div>
               <div className="room-info-main">
                 <div className="room-details">
-                  <div className="room-icons">
-                  </div>
                   <h2>{selectedRoom.name}</h2>
-                  <p>{selectedRoom.price}</p>
+                  <p>R{selectedRoom.price}/ night</p>
                   <p>
                     <strong>Room Size:</strong> {selectedRoom.size}
                   </p>
@@ -174,8 +176,7 @@ const Allrooms = () => {
                     <strong>Bed Options:</strong> {selectedRoom.bedOptions}
                   </p>
                   <p>
-                    <strong>Bathroom Details:</strong>{" "}
-                    {selectedRoom.bathroomDetails}
+                    <strong>Bathroom Details:</strong> {selectedRoom.bathroomDetails}
                   </p>
                   <p>
                     <strong>Flooring:</strong> {selectedRoom.flooring}
@@ -239,8 +240,8 @@ const Allrooms = () => {
                     of guests, rooms, and children to proceed with the booking.
                   </p>
                   <p className="total-price">
-                    <strong>Total Price: ${totalPrice}</strong>
-                  </p> {/* Display total price */}
+                    <strong>Total Price: R{totalPrice.toFixed(2)}</strong>
+                  </p>
                   <button className="btn" onClick={handleReserveNow}>
                     Reserve Now
                   </button>

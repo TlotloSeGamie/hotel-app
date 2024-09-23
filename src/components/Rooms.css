@@ -168,6 +168,25 @@
     gap: 1rem;
 }
 
+.modal-close {
+    background-color: transparent; 
+    border: none; 
+    color: #333; 
+    font-size: 3rem; 
+    cursor: pointer; 
+    transition: color 0.3s, transform 0.2s; 
+  }
+  
+  .modal-close:hover {
+    color: #0004ff; 
+    transform: scale(1.1); 
+  }
+  
+  .modal-close:focus {
+    outline: none; 
+  }
+  
+
 .main-image img {
     width: 100%;
     height: auto;

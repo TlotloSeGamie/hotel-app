@@ -1,45 +1,36 @@
-.Checkout-container {
+.checkout-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+.checkout-container {
+    display: flex;
     width: 100%;
+    max-width: 75rem; 
+    margin: 2rem auto; 
     background-color: rgb(253, 253, 255);
-    padding: 2rem;
+    padding: 2rem;/* Adjust this value to match or exceed the navbar height */
+    border-radius: 1rem; /* Rounded corners */
+    box-shadow: 0px 0.25rem 0.75rem rgba(0, 0, 0, 0.1); /* Soft shadow */
     font-family: 'Arial', sans-serif;
 }
 
-.Checkout-container .check-img {
-    width: 100%;
-    height: 20vh;
-    margin-top: 5rem;
-    display: flex;
-    justify-content: center;
+.room-details {
+    margin-bottom: 2rem; /* Spacing below room details */
 }
 
-.Checkout-container img {
-    width: 100%;
-    object-fit: cover;
-    height: 100%;
+.room-details h2 {
+    font-size: 2rem; /* Larger title */
+    margin-bottom: 1rem; /* Spacing below title */
 }
 
-.Checkout-container .cheque-container {
-    display: flex;
-    justify-content: space-around;
-    gap: 2rem;
-    margin-top: 3rem;
+.room-details p {
+    font-size: 1.125rem; /* Slightly larger font for readability */
+    margin: 0.5rem 0; /* Spacing between paragraphs */
 }
 
-.Checkout-container .cheq, .Checkout-container .info {
-    width: 45%;
-    padding: 1.5rem;
-    border: 1px solid #9c9c9c;
-    border-radius: 1rem;
-    background-color: #fff;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.Checkout-container .checks, .guest, .amount {
-    margin-top: 1rem;
-}
-
-.Checkout-container .complete-btn {
+.checkout-container .complete-btn {
     width: 100%;
     padding: 1rem;
     background-color: #223ffc;
@@ -51,24 +42,25 @@
     transition: background-color 0.3s ease;
 }
 
-.Checkout-container .complete-btn:hover {
+.checkout-container .complete-btn:hover {
     background-color: #0012a0;
 }
 
-.Checkout-container .agree {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    margin-top: 1rem;
-}
-
-.Checkout-container input[type="date"], input[type="number"], input[type="text"], input[type="email"], select {
+.checkout-container input[type="date"],
+.checkout-container input[type="number"],
+.checkout-container input[type="text"],
+.checkout-container input[type="email"],
+.checkout-container select {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 0.3rem;
     width: 100%;
+    margin-bottom: 1rem; /* Spacing below input fields */
 }
 
-.Checkout-container .method {
-    margin-top: 1.5rem;
+.checkout-container .agree {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 1rem;
 }

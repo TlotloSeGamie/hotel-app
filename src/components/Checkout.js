@@ -1,56 +1,67 @@
 import "./Checkout.css";
-import { useNavigate, useLocation } from "react-router-dom"; 
+import { useLocation } from "react-router-dom"; 
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { useState, useEffect } from 'react';
-import { db } from "../config/firebase";
 import BookingForm from "./BookingForm";
+import { useState } from "react";
 
-const Checkout = ({ roomId }) => {
-  const [roomDetails, setRoomDetails] = useState(null);
-
-
-  const navigate = useNavigate();
+const Checkout = () => {
   const location = useLocation();
-  const room=location.state.room
-  console.log('location', location.state.room)
+  const room = location.state.room;
+  const initialCheckInDate = location.state.checkInDate;
+  const initialCheckOutDate = location.state.checkOutDate;
+  const numGuests = location.state.numGuests;
+  const numChildren = location.state.numChildren;
 
-  // useEffect(() => {
-  //   const fetchRoomDetails = async () => {
-  //     try {
-  //       console.log("Fetching room details for roomId:", roomId);
-  //       const roomRef = db.collection('rooms').doc(roomId);
-  //       const roomSnapshot = await roomRef.get();
-  //       console.log("Room snapshot:", roomSnapshot);
-  //       if (roomSnapshot.exists) {
-  //         setRoomDetails(roomSnapshot.data());
-  //       } else {
-  //         console.log("Room does not exist");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching room details: ", error);
-  //     }
-  //   };
+  const [checkInDate, setCheckInDate] = useState(initialCheckInDate);
+  const [checkOutDate, setCheckOutDate] = useState(initialCheckOutDate);
 
-  //   fetchRoomDetails();
-  // }, [roomId]);
+  // Calculate total number of days booked
+  const calculateDaysBooked = (inDate, outDate) => {
+    const checkIn = new Date(inDate);
+    const checkOut = new Date(outDate);
+    const timeDiff = Math.abs(checkOut - checkIn);
+    return Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+  };
 
-  // if (!roomDetails) {
-  //   return <div>Loading room details...</div>;
-  // }
+  // Total price calculation
+  const totalDays = calculateDaysBooked(checkInDate, checkOutDate);
+  const totalPrice = totalDays * room.price;
 
   return (
-    <div className="checkout-container">
+    <div className="checkout-page">
+      <Navbar />
       <h1>Checkout</h1>
-      <div className="room-details">
-        <h2>{room.name}</h2>
-        <p>{room.description}</p>
-        <p><strong>Price: </strong>${room.price}</p>
-        {/* <p><strong>Amenities: </strong>{room.amenities.join(', ')}</p> */}
+      <div className="checkout-container">
+        <div className="room-details">
+          <h2>{room.name}</h2>
+          <p>{room.description}</p>
+          <p><strong>Price per Night: </strong>${room.price}</p>
+          <p><strong>Total Days Booked: </strong>{totalDays}</p>
+          <p><strong>Number of Guests: </strong>{numGuests}</p>
+          <p><strong>Number of Children: </strong>{numChildren}</p>
+          <p><strong>Total Price: </strong>${totalPrice.toFixed(2)}</p>
+        </div>
+        <div className="booking-section">
+          <div className="date-selection">
+            <label>Check-in Date:</label>
+            <input
+              type="date"
+              value={checkInDate}
+              onChange={(e) => setCheckInDate(e.target.value)}
+            />
+            <label>Check-out Date:</label>
+            <input
+              type="date"
+              value={checkOutDate}
+              onChange={(e) => setCheckOutDate(e.target.value)}
+            />
+          </div>
+          {/* Pass totalDays to BookingForm */}
+          <BookingForm roomDetails={room} totalDays={totalDays} />
+        </div>
       </div>
-
-      {/* Continue to booking form */}
-      <BookingForm roomDetails={room} />
+      <Footer />
     </div>
   );
 };
