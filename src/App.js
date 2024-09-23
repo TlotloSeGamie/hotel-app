@@ -11,6 +11,7 @@ import Register from './components/Register';
 import Reservation from './components/Reservation';
 import Suites from './components/Suites';
 import Allrooms from './components/Allrooms';
+import BookingForm from './components/BookingForm';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/rooms" element={<Suites />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/reservation" element={<Reservation />} />
+        <Route path='booking' element={<BookingForm />} /> 
         <Route path="/offer" element={<Offer />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/login" element={<Login />} />

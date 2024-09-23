@@ -24,14 +24,12 @@ const BookingForm = ({ roomDetails }) => {
   const [altEmail, setAltEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [altPhone, setAltPhone] = useState('');
-  const [billingAddress1, setBillingAddress1] = useState({ street: '', city: '', region: '', zip: '' });
-  const [billingAddress2, setBillingAddress2] = useState({ street: '', city: '', region: '', zip: '' });
   const [country, setCountry] = useState('');
   const [bookingSuccess, setBookingSuccess] = useState(false);
 
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
-    if (!firstName || !lastName || !checkInDate || !checkOutDate || !email || !phone || !billingAddress1.street || !billingAddress1.city || !billingAddress1.region || !billingAddress1.zip || !country) {
+    if (!firstName || !lastName || !email || !phone || !country) {
       alert('Please fill in all required details.');
       return;
     }
@@ -40,14 +38,10 @@ const BookingForm = ({ roomDetails }) => {
       title,
       firstName,
       lastName,
-      checkInDate,
-      checkOutDate,
       email,
       altEmail,
       phone,
       altPhone,
-      billingAddress1,
-      billingAddress2,
       country,
       roomDetails
     });
@@ -66,36 +60,39 @@ const BookingForm = ({ roomDetails }) => {
         <form className="booking-form" onSubmit={handleBookingSubmit}>
           <h2>Guest Information</h2>
           <div className="guest-info">
-            <div className="form-group">
-              <label>Title:</label>
-              <select value={title} onChange={(e) => setTitle(e.target.value)} required>
-                <option value="">Select a title</option>
-                <option value="Mr">Mr</option>
-                <option value="Mrs">Mrs</option>
-                <option value="Ms">Ms</option>
-                <option value="Dr">Dr</option>
-                <option value="Prof">Prof</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label>First Name:</label>
-              <input
-                type="text"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Last Name:</label>
-              <input
-                type="text"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                required
-              />
-            </div>
+          <div className="form-group">
+            <label>Title:</label>
+            <select value={title} onChange={(e) => setTitle(e.target.value)} required>
+              <option value="">Select a title</option>
+              <option value="Mr">Mr</option>
+              <option value="Mrs">Mrs</option>
+              <option value="Ms">Ms</option>
+              <option value="Dr">Dr</option>
+              <option value="Prof">Prof</option>
+            </select>
           </div>
+          
+          <div className="form-group">
+            <label>First Name:</label>
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>Last Name:</label>
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+
           
           <h2>Contact Information</h2>
           <div className="contact-info">
@@ -131,7 +128,7 @@ const BookingForm = ({ roomDetails }) => {
               />
             </div>
             <div className="form-group">
-              <label>Alternative Phone Number (Optional):</label>
+              <label>Alternative Phone Number:</label>
               <input
                 type="text"
                 value={altPhone}
