@@ -1068,3 +1068,333 @@ export const fetchData = () => async (dispatch) => {
 // };
 
 // export default BookingForm;
+
+
+//paypal payment
+// import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+// import './BookingForm.css';
+
+// const countries = [
+//   { name: 'United States', code: '+1' },
+//   { name: 'Canada', code: '+1' },
+//   { name: 'United Kingdom', code: '+44' },
+//   { name: 'Australia', code: '+61' },
+//   { name: 'Germany', code: '+49' },
+//   { name: 'France', code: '+33' },
+//   { name: 'India', code: '+91' },
+//   { name: 'Japan', code: '+81' },
+//   { name: 'South Africa', code: '+27' },
+//   // Add more countries as needed
+// ];
+
+// const BookingForm = ({ roomDetails }) => {
+//   const [title, setTitle] = useState('');
+//   const [firstName, setFirstName] = useState('');
+//   const [lastName, setLastName] = useState('');
+//   const [checkInDate, setCheckInDate] = useState('');
+//   const [checkOutDate, setCheckOutDate] = useState('');
+//   const [email, setEmail] = useState('');
+//   const [altEmail, setAltEmail] = useState('');
+//   const [phone, setPhone] = useState('');
+//   const [altPhone, setAltPhone] = useState('');
+//   const [country, setCountry] = useState('');
+//   const [showPayPal, setShowPayPal] = useState(false);
+//   const navigate = useNavigate();
+
+//   const handleBookingSubmit = (e) => {
+//     e.preventDefault();
+
+//     // Validate required fields
+//     if (
+//       !title.trim() || 
+//       !firstName.trim() || 
+//       !lastName.trim() || 
+//       !checkInDate.trim() || 
+//       !checkOutDate.trim() || 
+//       !email.trim() || 
+//       !phone.trim() || 
+//       !country.trim()
+//     ) {
+//       alert('Please fill in all required details.');
+//       return;
+//     }
+
+//     // Show PayPal buttons after form submission
+//     setShowPayPal(true);
+//   };
+
+//   return (
+//     <div className="checkout-container">
+//       <form className="booking-form" onSubmit={handleBookingSubmit}>
+//         <h2>Guest Information</h2>
+//         {/* Form Fields */}
+//         <div className="form-group">
+//           <label>Title*</label>
+//           <select value={title} onChange={(e) => setTitle(e.target.value)} required>
+//             <option value="">Select Title</option>
+//             <option value="Mr">Mr</option>
+//             <option value="Mrs">Mrs</option>
+//             <option value="Ms">Ms</option>
+//             <option value="Dr">Dr</option>
+//           </select>
+//         </div>
+
+//         <div className="form-group">
+//           <label>First Name*</label>
+//           <input
+//             type="text"
+//             value={firstName}
+//             onChange={(e) => setFirstName(e.target.value)}
+//             required
+//           />
+//         </div>
+
+//         <div className="form-group">
+//           <label>Last Name*</label>
+//           <input
+//             type="text"
+//             value={lastName}
+//             onChange={(e) => setLastName(e.target.value)}
+//             required
+//           />
+//         </div>
+
+//         <div className="form-group">
+//           <label>Check-in Date*</label>
+//           <input
+//             type="date"
+//             value={checkInDate}
+//             onChange={(e) => setCheckInDate(e.target.value)}
+//             required
+//           />
+//         </div>
+
+//         <div className="form-group">
+//           <label>Check-out Date*</label>
+//           <input
+//             type="date"
+//             value={checkOutDate}
+//             onChange={(e) => setCheckOutDate(e.target.value)}
+//             required
+//           />
+//         </div>
+
+//         {/* Room Details */}
+//         <div className="form-group">
+//           <label>Room Details:</label>
+//           <div className="room-details">
+//             <p>{roomDetails.name}</p>
+//             <p>Price: ${roomDetails.price}</p>
+//           </div>
+//         </div>
+
+//         {/* Submit Button */}
+//         {!showPayPal && (
+//           <button type="submit" className="complete-btn">
+//             Book Now
+//           </button>
+//         )}
+//       </form>
+
+//       {/* PayPal Buttons */}
+//       {showPayPal && (
+//         <div className="paypal-section">
+//           <h3>Complete Your Payment</h3>
+//           <PayPalScriptProvider options={{ "client-id": "test", currency: "USD", intent: "capture" }}>
+//             <PayPalButtons
+//               createOrder={(data, actions) => {
+//                 return actions.order.create({
+//                   purchase_units: [{
+//                     amount: {
+//                       value: roomDetails.price.toString(),
+//                     },
+//                   }],
+//                 });
+//               }}
+//               onApprove={async (data, actions) => {
+//                 const details = await actions.order.capture();
+//                 console.log('Transaction completed by ' + details.payer.name.given_name);
+//                 // Navigate to a confirmation page
+//                 navigate('/reservation', {
+//                   state: {
+//                     bookingSuccess: true,
+//                     firstName,
+//                     lastName,
+//                     roomDetails,
+//                     checkInDate,
+//                     checkOutDate,
+//                   },
+//                 });
+//               }}
+//             />
+//           </PayPalScriptProvider>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default BookingForm;
+
+
+
+import React, { useState } from 'react';
+import "./BookingForm.css";
+
+const countries = [
+  { name: 'United States', code: '+1' },
+  { name: 'Canada', code: '+1' },
+  { name: 'United Kingdom', code: '+44' },
+  { name: 'Australia', code: '+61' },
+  { name: 'Germany', code: '+49' },
+  { name: 'France', code: '+33' },
+  { name: 'India', code: '+91' },
+  { name: 'Japan', code: '+81' },
+  { name: 'South Africa', code: '+27' },
+  // Add more countries as needed
+];
+
+const BookingForm = ({ roomDetails }) => {
+  const [title, setTitle] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [checkInDate, setCheckInDate] = useState('');
+  const [checkOutDate, setCheckOutDate] = useState('');
+  const [email, setEmail] = useState('');
+  const [altEmail, setAltEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [altPhone, setAltPhone] = useState('');
+  const [country, setCountry] = useState('');
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+
+  const handleBookingSubmit = async (e) => {
+    e.preventDefault();
+    if (!firstName || !lastName || !email || !phone || !country) {
+      alert('Please fill in all required details.');
+      return;
+    }
+
+    console.log({
+      title,
+      firstName,
+      lastName,
+      email,
+      altEmail,
+      phone,
+      altPhone,
+      country,
+      roomDetails
+    });
+
+    setBookingSuccess(true);
+  };
+
+  return (
+    <div className="checkout-container">
+      {bookingSuccess ? (
+        <div className="success-message">
+          <h2>Booking Successful!</h2>
+          <p>Thank you for booking with us, {firstName} {lastName}. Your room ({roomDetails.name}) is booked from {checkInDate} to {checkOutDate}.</p>
+        </div>
+      ) : (
+        <form className="booking-form" onSubmit={handleBookingSubmit}>
+          <h2>Guest Information</h2>
+          <div className="guest-info">
+          <div className="form-group">
+            <label>Title:</label>
+            <select value={title} onChange={(e) => setTitle(e.target.value)} required>
+              <option value="">Select a title</option>
+              <option value="Mr">Mr</option>
+              <option value="Mrs">Mrs</option>
+              <option value="Ms">Ms</option>
+              <option value="Dr">Dr</option>
+              <option value="Prof">Prof</option>
+            </select>
+          </div>
+          
+          <div className="form-group">
+            <label>First Name:</label>
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>Last Name:</label>
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+
+          
+          <h2>Contact Information</h2>
+          <div className="contact-info">
+            <div className="form-group">
+              <label>Email:</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Alternative Email (Optional):</label>
+              <input
+                type="email"
+                value={altEmail}
+                onChange={(e) => setAltEmail(e.target.value)}
+                placeholder="Optional"
+              />
+            </div>
+          </div>
+          
+          <div className="contact-info">
+            <div className="form-group">
+              <label>Phone Number:</label>
+              <input
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+                placeholder="123-456-7890"
+              />
+            </div>
+            <div className="form-group">
+              <label>Alternative Phone Number:</label>
+              <input
+                type="text"
+                value={altPhone}
+                onChange={(e) => setAltPhone(e.target.value)}
+                placeholder="Optional"
+              />
+            </div>
+          </div>
+          
+          <div className="form-group">
+            <label>Country:</label>
+            <select value={country} onChange={(e) => setCountry(e.target.value)} required>
+              <option value="">Select a country</option>
+              {countries.map((countryItem) => (
+                <option key={countryItem.name} value={countryItem.name}>{countryItem.name}</option>
+              ))}
+            </select>
+          </div>
+          
+          <button type="submit" className="complete-btn">Book Now</button>
+        </form>
+      )}
+    </div>
+  );
+};
+
+export default BookingForm;

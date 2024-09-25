@@ -36,11 +36,11 @@ const Checkout = () => {
         <div className="room-details">
           <h2>{room.name}</h2>
           <p>{room.description}</p>
-          <p><strong>Price per Night: </strong>${room.price}</p>
+          <p><strong>Price per Night: </strong>R{room.price}</p>
           <p><strong>Total Days Booked: </strong>{totalDays}</p>
           <p><strong>Number of Guests: </strong>{numGuests}</p>
           <p><strong>Number of Children: </strong>{numChildren}</p>
-          <p><strong>Total Price: </strong>${totalPrice.toFixed(2)}</p>
+          <p><strong>Total Price: </strong>R{totalPrice.toFixed(2)}</p>
         </div>
         <div className="booking-section">
           <div className="date-selection">

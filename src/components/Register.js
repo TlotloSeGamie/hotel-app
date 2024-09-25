@@ -13,6 +13,8 @@ const Register = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [phone, setPhone] = useState('');
+    const [userName, setUserName] = useState('');
     const { user, loading, error } = useSelector((state) => state.auth);
 
     const navigate = useNavigate()
@@ -25,7 +27,7 @@ const Register = () => {
 
     const handleSignUp = () => {
 
-        dispatch(signUp({ email, password }))
+        dispatch(signUp({ email, password, userName, phone }))
 
     }
     useEffect(() => {
@@ -49,6 +51,7 @@ const Register = () => {
                         type="text"
                         placeholder="Username"
                         name="username"
+                        onChange={(e) => setUserName(e.target.value)}
                     />
                     <input
                         type="text"
@@ -57,9 +60,10 @@ const Register = () => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <input
-                        type="number"
+                        type="text"
                         placeholder="Contact Phone"
                         name="contact"
+                        onChange={(e) => setPhone(e.target.value)}
                     />
                     <input
                         type="password"

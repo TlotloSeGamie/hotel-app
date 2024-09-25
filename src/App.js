@@ -12,12 +12,22 @@ import Reservation from './components/Reservation';
 import Suites from './components/Suites';
 import Allrooms from './components/Allrooms';
 import BookingForm from './components/BookingForm';
+import Admin from './components/admin/Admin';
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 function App() {
+  const initialOptions = {
+    clientId: "Adnrk6DEbhOhKGsYGfLTbngdeOQLSHm7AU3yvMkD7cJrv7S8LxQk2pM5iuQaC4YhKTb5avPRDMRn5Qyi",
+    currency: "USD",
+    intent: "capture",
+};
   return (
+    <PayPalScriptProvider options={initialOptions} >
+
+    
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* */} <Route path="/" element={<Home />} />
         <Route path="/rooms" element={<Suites />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/reservation" element={<Reservation />} />
@@ -26,9 +36,11 @@ function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/all-rooms" element={<Allrooms />} />
+        <Route path="/all-rooms" element={<Allrooms />} /> 
+        <Route path='/admin' element={<Admin />} />
       </Routes>
     </Router>
+    </PayPalScriptProvider>
   );
 }
 
