@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Checkout.css';
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
-const PayPalMethod = () => {
+const Checkout = () => {
     const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
     const [currency, setCurrency] = useState(options.currency);
 
@@ -55,4 +55,4 @@ const PayPalMethod = () => {
     );
 }
 
-export default PayPalMethod;
+export default Checkout;

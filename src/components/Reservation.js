@@ -10,7 +10,7 @@ const Reservation = () => {
     const details = JSON.parse(localStorage.getItem('bookingDetails'));
     if (details) {
       setBookingDetails(details);
-      localStorage.removeItem('bookingDetails'); // Clear data after use
+      // localStorage.removeItem('bookingDetails'); // Clear data after use
     }
   }, []);
 

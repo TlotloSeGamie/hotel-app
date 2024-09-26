@@ -24,9 +24,12 @@ const Checkout = () => {
     return Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
   };
 
-  // Total price calculation
   const totalDays = calculateDaysBooked(checkInDate, checkOutDate);
   const totalPrice = totalDays * room.price;
+
+  localStorage.setItem('roomDetails', JSON.stringify({
+    room
+  }));
 
   return (
     <div className="checkout-page">

@@ -26,9 +26,12 @@ const dbSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    addBookingToState(state, action) {
+      state.data.push(action.payload); // Add the new booking to the state
+    },
   },
 });
-export const { setLoading, setData, setError } = dbSlice.actions;
+export const { setLoading, setData, setError, addBookingToState } = dbSlice.actions;
 export default dbSlice.reducer;
 export const fetchData = () => async (dispatch) => {
   dispatch(setLoading());
@@ -70,6 +73,21 @@ export const fetchData = () => async (dispatch) => {
 //     dispatch(setError(error.message));
 //   }
 // }
+export const addBookings = async (dispatch,bookingData) => {
+  try {
+    dispatch(setLoading());
+    console.log("Data to push:", bookingData);
+    await addDoc(collection(db, "bookings"), bookingData);
+    console.log("Booking added successfully!");
+    dispatch(fetchData()); // Re-fetch the bookings to update the state
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+};
+
+export const addBookingSuccess = () => ({
+  type: 'ADD_BOOKING_SUCCESS',
+});
 
 export const getBookings = () => async (dispatch) => {
   dispatch(setLoading());

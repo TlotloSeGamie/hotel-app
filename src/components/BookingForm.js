@@ -47,11 +47,25 @@ const BookingForm = ({ roomDetails }) => {
     };
 
     // Store booking details in localStorage or state management
-    localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails));
-
     // Navigate to Reservation page
     navigate('/reservation');
   };
+
+  
+  const handleData=(()=>{
+    localStorage.setItem('bookingDetails', JSON.stringify({
+      title,
+      firstName,
+      lastName,
+      email,
+      altEmail,
+      phone,
+      altPhone,
+      country,
+      roomDetails
+    }));
+  })
+
 
   return (
     <div className="checkout-container">
@@ -140,7 +154,7 @@ const BookingForm = ({ roomDetails }) => {
           </select>
         </div>
         
-        <button type="submit" className="complete-btn">Book Now</button>
+        <button type="submit" className="complete-btn" onClick={()=>handleData}>Book Now</button>
       </form>
     </div>
   );
