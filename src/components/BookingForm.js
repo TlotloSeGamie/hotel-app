@@ -28,7 +28,7 @@ const BookingForm = ({ roomDetails }) => {
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleBookingSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (!firstName || !lastName || !email || !phone || !country) {
       alert('Please fill in all required details.');
       return;
@@ -69,7 +69,7 @@ const BookingForm = ({ roomDetails }) => {
 
   return (
     <div className="checkout-container">
-      <form className="booking-form" onSubmit={handleBookingSubmit}>
+      <div className="booking-form" >
         <h2>Guest Information</h2>
         <div className="guest-info">
           <div className="form-group">
@@ -154,8 +154,8 @@ const BookingForm = ({ roomDetails }) => {
           </select>
         </div>
         
-        <button type="submit" className="complete-btn" onClick={()=>handleData}>Book Now</button>
-      </form>
+        <button type="submit" className="complete-btn" onClick={()=>{handleData(); handleBookingSubmit()}}>Book Now</button>
+      </div>
     </div>
   );
 };
