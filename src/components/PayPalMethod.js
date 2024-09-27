@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import './Checkout.css';
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { AddToFireStrore } from '../redux/bookingSlice';
+import { useDispatch } from 'react-redux';
 
 const Checkout = () => {
     const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
     const [currency, setCurrency] = useState(options.currency);
+
+    const dispatches = useDispatch()
+    const bookingDetails = JSON.parse(localStorage.getItem('bookingDetails'));
+    const roomDetails = JSON.parse(localStorage.getItem('roomDetails'));
+    
 
     const onCurrencyChange = ({ target: { value } }) => {
         setCurrency(value);
@@ -33,6 +40,7 @@ const Checkout = () => {
         return actions.order.capture().then((details) => {
             const name = details.payer.name.given_name;
             alert(`Transaction completed by ${name}`);
+            AddToFireStrore(roomDetails, bookingDetails,dispatches)
         });
     }
 
