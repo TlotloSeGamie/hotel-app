@@ -8,6 +8,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { FaHeart, FaShareAlt } from 'react-icons/fa';
 import { fetchData } from "../redux/dbSlice";
+import Checkout from "./Checkout";
 
 const Allrooms = () => {
   const [selectedRoom, setSelectedRoom] = useState(null);
@@ -22,6 +23,14 @@ const Allrooms = () => {
 
   const { data, loading, error } = useSelector((state) => state.data);
   const dispatch = useDispatch();
+  localStorage.setItem("extraDetails", JSON.stringify({
+    checkInDate,
+    checkOutDate,
+    numGuests,
+    numChildren,
+    numRooms,
+    totalPrice
+  }));
 
   useEffect(() => {
     dispatch(fetchData());

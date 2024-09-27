@@ -11,7 +11,7 @@ const Checkout = () => {
     const dispatches = useDispatch()
     const bookingDetails = JSON.parse(localStorage.getItem('bookingDetails'));
     const roomDetails = JSON.parse(localStorage.getItem('roomDetails'));
-    
+    const extraDetails = JSON.parse(localStorage.getItem('extraDetails')); 
 
     const onCurrencyChange = ({ target: { value } }) => {
         setCurrency(value);
@@ -40,7 +40,7 @@ const Checkout = () => {
         return actions.order.capture().then((details) => {
             const name = details.payer.name.given_name;
             alert(`Transaction completed by ${name}`);
-            AddToFireStrore(roomDetails, bookingDetails,dispatches)
+            AddToFireStrore(roomDetails, bookingDetails, extraDetails, dispatches)
         });
     }
 

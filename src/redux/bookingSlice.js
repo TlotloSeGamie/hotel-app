@@ -34,7 +34,7 @@ export const { setLoading, setData, setError } = BookingSlice.actions
 export default BookingSlice.reducer
 
 
-export const AddToFireStrore=async (roomDetails, bookingDetails,dispatch)=>{
+export const AddToFireStrore=async (roomDetails, bookingDetails, extraDetails,dispatch)=>{
     dispatch(setLoading())
     console.log("detILS:",{
         "title": bookingDetails.title,
@@ -43,8 +43,8 @@ export const AddToFireStrore=async (roomDetails, bookingDetails,dispatch)=>{
         "Email": bookingDetails.email,
         "phone": bookingDetails.phone,
         "Price": roomDetails.room.price,
-        "Guest": bookingDetails.numGuest,
-        "Children": bookingDetails.numChildren,
+        "Guest": extraDetails.numGuests,
+        "Children": extraDetails.numChildren,
         "Paid": "Yes"
         })
     // console.log("ROOM detILS:",roomDetails)
@@ -56,8 +56,11 @@ export const AddToFireStrore=async (roomDetails, bookingDetails,dispatch)=>{
             "Email": bookingDetails.email,
             "phone": bookingDetails.phone,
             "Price": roomDetails.room.price,
-            // "Guest": bookingDetails.numGuest,
-            // "Children": bookingDetails.numChildren,
+            "Guests": extraDetails.numGuests,
+            "Children": extraDetails.numChildren,
+            "checkIn": extraDetails.checkInDate,
+            "CheckOut": extraDetails.checkOutDate,
+            "Total":extraDetails.totalPrice,
             "Paid": "Yes"
             });
         dispatch(setData({
