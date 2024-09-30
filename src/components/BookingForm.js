@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 import "./BookingForm.css";
 
 const countries = [
@@ -12,7 +12,6 @@ const countries = [
   { name: 'India', code: '+91' },
   { name: 'Japan', code: '+81' },
   { name: 'South Africa', code: '+27' },
-  // Add more countries as needed
 ];
 
 const BookingForm = ({ roomDetails }) => {
@@ -25,7 +24,7 @@ const BookingForm = ({ roomDetails }) => {
   const [altPhone, setAltPhone] = useState('');
   const [country, setCountry] = useState('');
   
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
 
   const handleBookingSubmit = async (e) => {
     // e.preventDefault();
@@ -45,9 +44,6 @@ const BookingForm = ({ roomDetails }) => {
       country,
       roomDetails
     };
-
-    // Store booking details in localStorage or state management
-    // Navigate to Reservation page
     navigate('/reservation');
   };
 

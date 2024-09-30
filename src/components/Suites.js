@@ -15,7 +15,7 @@ const Suites = ({ showDropdown }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const roomData = [
-    // Your room data goes here...
+    // Room data goes here...
   ];
 
   const openModal = (room) => {
@@ -35,7 +35,7 @@ const Suites = ({ showDropdown }) => {
   };
 
   if (showDropdown) {
-    return null; // Render nothing if dropdown is visible
+    return null; 
   }
 
   return (

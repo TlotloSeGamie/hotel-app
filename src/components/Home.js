@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Home.css"; // Ensure this is the correct path
+import "./Home.css"; 
 import { FaCalendarAlt } from "react-icons/fa";
 import Rooms from "./Suites";
 import Offer from "./Offer";

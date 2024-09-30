@@ -60,7 +60,7 @@ a:hover {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Ensures the dropdown appears above other elements */
+  z-index: 1000; 
   min-width: 150px;
   display: flex;
   flex-direction: column;
@@ -74,7 +74,7 @@ a:hover {
 }
 
 .dropdown-menu ul li {
-  padding: 0.625rem; /* Adjusted to use rem */
+  padding: 0.625rem; 
 }
 
 .dropdown-menu ul li a {
@@ -87,11 +87,34 @@ a:hover {
   color: #0282c3;
 }
 
-/* Ensure content below the navbar is not hidden */
 body {
-  padding-top: 5rem; /* Adjust this value based on your navbar height */
+  padding-top: 5rem; 
 }
 
 .checkout-container {
-  margin-top: 2rem; /* Spacing below the navbar */
+  margin-top: 2rem;
+}
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.user-icon {
+  display: flex;
+  align-items: center;
+}
+
+.user-icon span {
+  margin-left: 10px;
+  font-size: 16px;
+  color: #0282c3;
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: none;
+  color: #0282c3;
+  cursor: pointer;
+  font-size: 16px;
 }

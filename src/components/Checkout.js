@@ -16,12 +16,11 @@ const Checkout = () => {
   const [checkInDate, setCheckInDate] = useState(initialCheckInDate);
   const [checkOutDate, setCheckOutDate] = useState(initialCheckOutDate);
 
-  // Calculate total number of days booked
   const calculateDaysBooked = (inDate, outDate) => {
     const checkIn = new Date(inDate);
     const checkOut = new Date(outDate);
     const timeDiff = Math.abs(checkOut - checkIn);
-    return Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+    return Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); 
   };
 
   const totalDays = calculateDaysBooked(checkInDate, checkOutDate);
@@ -60,7 +59,6 @@ const Checkout = () => {
               onChange={(e) => setCheckOutDate(e.target.value)}
             />
           </div>
-          {/* Pass totalDays to BookingForm */}
           <BookingForm roomDetails={room} totalDays={totalDays} />
         </div>
       </div>

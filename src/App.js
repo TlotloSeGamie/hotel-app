@@ -12,8 +12,9 @@ import Reservation from './components/Reservation';
 import Suites from './components/Suites';
 import Allrooms from './components/Allrooms';
 import BookingForm from './components/BookingForm';
-import Admin from './components/admin/Admin';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import Main from './components/Main';
+import AdminDashboard from './components/Dashborad';
 
 function App() {
   const initialOptions = {
@@ -27,7 +28,9 @@ function App() {
     
     <Router>
       <Routes>
-        {/* */} <Route path="/" element={<Home />} />
+        {/* <Route path="/home" element={<Home />} />
+        <Route path='/' element={<Main />} />
+         */}<Route path='/' element={<AdminDashboard />} />
         <Route path="/rooms" element={<Suites />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/reservation" element={<Reservation />} />
@@ -37,7 +40,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/all-rooms" element={<Allrooms />} /> 
-        <Route path='/admin' element={<Admin />} />
       </Routes>
     </Router>
     </PayPalScriptProvider>

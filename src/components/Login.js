@@ -22,7 +22,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      alert("Successully logged-In!");
+      alert("Successfully logged in!");
       navigate("/");
     }
   }, [user, navigate]);
@@ -31,11 +31,11 @@ const Login = () => {
     <div className="login-container">
       <div className="login-form">
         <div className="gone">
-          <img src={logo} className="logone" />
+          <img src={logo} className="logone" alt="Logo" />
         </div>
         <div className="ma-text">
           <h1>
-            <b>Create an Account</b>
+            <b>Login</b>
           </h1>
           <input
             type="text"
@@ -45,7 +45,7 @@ const Login = () => {
           />
           <input
             type="password"
-            placeholder="password"
+            placeholder="Password"
             name="password"
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -54,7 +54,13 @@ const Login = () => {
             LOGIN
           </button>
           <h3>
-            Don't have an account? <span>Sign Up</span>
+            Don't have an account?{" "}
+            <span
+              style={{ cursor: "pointer", color: "blue" }}
+              onClick={() => navigate("/register")}
+            >
+              Sign Up
+            </span>
           </h3>
 
           {loading && (
@@ -74,7 +80,7 @@ const Login = () => {
       </div>
       <div className="login-img">
         <div className="sign">
-          <img src={loginimg} />
+          <img src={loginimg} alt="Login" />
         </div>
       </div>
     </div>
