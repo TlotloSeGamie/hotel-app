@@ -28,9 +28,9 @@ function App() {
     
     <Router>
       <Routes>
-        {/* <Route path="/home" element={<Home />} />
+        {/*  <Route path="/home" element={<Home />} />
         <Route path='/' element={<Main />} />
-         */}<Route path='/' element={<AdminDashboard />} />
+        */}<Route path='/' element={<AdminDashboard />} />
         <Route path="/rooms" element={<Suites />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/reservation" element={<Reservation />} />
