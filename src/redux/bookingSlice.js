@@ -80,3 +80,23 @@ export const AddToFireStrore=async (roomDetails, bookingDetails, extraDetails,di
     }
 
 }
+
+export const fetchDataFirestore=async(dispatch)=>{
+    dispatch(setLoading())
+    try{
+        const docSnap = await getDocs(collection(db,"Bookings"));
+        if (docSnap.docs.length>0) {
+            const data=docSnap.docs.map((doc)=>({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            dispatch(setData(data));
+          console.log("Document data is:", docSnap.docs);
+        } else {
+          console.log("No such document!");
+        }
+    }
+    catch(error){
+        dispatch(setError(error.message));
+    }
+  }

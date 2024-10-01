@@ -1501,3 +1501,89 @@ export const getBookings = () => async (dispatch) => {
     dispatch(setError(error.message));
   }
 };
+
+
+
+
+// reserve form for admin
+{activeTab === "reserve" && (
+  <div className="reserve-form">
+    <h2>Make a Reservation</h2>
+    <form>
+      <div className="form-group">
+        <label htmlFor="title">Title</label>
+        <select id="title" name="title" required>
+          <option value="">Select Title</option>
+          <option value="Mr">Mr</option>
+          <option value="Ms">Ms</option>
+          <option value="Mrs">Mrs</option>
+          <option value="Dr">Dr</option>
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" required />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="checkinDate">Check-in Date</label>
+        <input type="date" id="checkinDate" name="checkinDate" required />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="checkoutDate">Check-out Date</label>
+        <input type="date" id="checkoutDate" name="checkoutDate" required />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="room">Room</label>
+        <input type="text" id="room" name="room" required />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="price">Price (per night)</label>
+        <input type="number" id="price" name="price" required />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="guests">Number of Guests</label>
+        <input type="number" id="guests" name="guests" required />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="children">Number of Children</label>
+        <input type="number" id="children" name="children" required />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="totalDays">Total Number of Days</label>
+        <input type="number" id="totalDays" name="totalDays" required />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="totalPrice">Total Price</label>
+        <input type="number" id="totalPrice" name="totalPrice" required />
+      </div>
+
+      <button type="submit" className="reserve-btn">
+        Submit Reservation
+      </button>
+    </form>
+  </div>
+)}

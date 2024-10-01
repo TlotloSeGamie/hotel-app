@@ -102,3 +102,20 @@ export const getBookings = () => async (dispatch) => {
     dispatch(setError(error.message));
   }
 };
+
+export const getUsers = () => async (dispatch) => {
+  dispatch(setLoading());
+  try {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    console.log("Fetched users:", data);  // Add this to verify data
+    dispatch(setData(data));
+  } catch (error) {
+    console.log("Error fetching users:", error);  // Add this for error checking
+    dispatch(setError(error.message));
+  }
+};
+

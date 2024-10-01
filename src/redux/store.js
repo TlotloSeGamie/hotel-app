@@ -1,12 +1,14 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import authReducer from '../redux/authSlice';
 import dbSliceReducer from './dbSlice';
+import bookingSlice from './bookingSlice';
 
 
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  data: dbSliceReducer
+  data: dbSliceReducer,
+  booking: bookingSlice
 
 })
 

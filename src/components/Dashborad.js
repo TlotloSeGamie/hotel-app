@@ -1,11 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Dashboard.css';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData, getUsers } from "../redux/dbSlice"; 
+import { getBookings, setLoading, addBookings } from "../redux/dbSlice"; // Import necessary actions from dbSlice
+import { fetchDataFirestore } from "../redux/bookingSlice";
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState("overview");
+    const [bookingData, setBookingData] = useState({}); // Add bookingData state
+    const dispatch = useDispatch();
+
+    // useEffect(()=> {
+    //     fetchDataFirestore(dispatch)
+    // },[])
+    const {data, loading, error} = useSelector((state)=> state.booking)
+
+    console.log(data);
+    
+    // Fetch users and bookings from Redux
+    const userState = useSelector((state) => state.data);
+    const bookingState = useSelector((state) => state.booking);
+    
+    const users = userState ? userState.data : [];
+    const loadingUsers = userState ? userState.loading : false;
+    
+    const bookings = bookingState ? bookingState.data : [];
+    const loadingBookings = bookingState ? bookingState.loading : false;
 
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
+        
+        // Fetch bookings when "Reservations" tab is clicked
+        if (tabName === "reservations") {
+            dispatch(getBookings());
+            fetchDataFirestore(dispatch)
+        }
+
+        // Optionally set loading state here if necessary
+        dispatch(setLoading());
+    };
+
+    const handleBookingChange = (e) => {
+        const { name, value } = e.target;
+        setBookingData({ ...bookingData, [name]: value }); // Update booking data
+    };
+
+    const handleSubmitBooking = (e) => {
+        e.preventDefault();
+        dispatch(addBookings(bookingData)); // Dispatch the booking data
+        setBookingData({}); // Reset the form after submission
     };
 
     return (
@@ -14,42 +56,12 @@ const AdminDashboard = () => {
             <aside className="sidebar">
                 <h2>Admin Panel</h2>
                 <ul className="sidebar-nav">
-                    <li
-                        className={activeTab === "overview" ? "active" : ""}
-                        onClick={() => handleTabClick("overview")}
-                    >
-                        Overview
-                    </li>
-                    <li
-                        className={activeTab === "manage-users" ? "active" : ""}
-                        onClick={() => handleTabClick("manage-users")}
-                    >
-                        Manage Users
-                    </li>
-                    <li
-                        className={activeTab === "manage-content" ? "active" : ""}
-                        onClick={() => handleTabClick("manage-content")}
-                    >
-                        Manage Content
-                    </li>
-                    <li
-                        className={activeTab === "reports" ? "active" : ""}
-                        onClick={() => handleTabClick("reports")}
-                    >
-                        View Reports
-                    </li>
-                    <li
-                        className={activeTab === "reservations" ? "active" : ""}
-                        onClick={() => handleTabClick("reservations")}
-                    >
-                        Reservations
-                    </li>
-                    <li
-                        className={activeTab === "reserve" ? "active" : ""}
-                        onClick={() => handleTabClick("reserve")}
-                    >
-                        Reserve
-                    </li>
+                    <li className={activeTab === "overview" ? "active" : ""} onClick={() => handleTabClick("overview")}>Overview</li>
+                    <li className={activeTab === "manage-users" ? "active" : ""} onClick={() => handleTabClick("manage-users")}>Manage Users</li>
+                    <li className={activeTab === "manage-content" ? "active" : ""} onClick={() => handleTabClick("manage-content")}>Manage Content</li>
+                    <li className={activeTab === "reports" ? "active" : ""} onClick={() => handleTabClick("reports")}>View Reports</li>
+                    <li className={activeTab === "reservations" ? "active" : ""} onClick={() => handleTabClick("reservations")}>Reservations</li>
+                    <li className={activeTab === "reserve" ? "active" : ""} onClick={() => handleTabClick("reserve")}>Reserve</li>
                 </ul>
             </aside>
 
@@ -70,7 +82,36 @@ const AdminDashboard = () => {
                     {activeTab === "manage-users" && (
                         <div className="manage-users">
                             <h2>Manage Users</h2>
-                            <p>Here, you can view, edit, or remove users from the system.</p>
+                            {loadingUsers ? (
+                                <p>Loading users...</p>
+                            ) : (
+                                <table className="users-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {users.length > 0 ? (
+                                            users.map((user) => (
+                                                <tr key={user.id}>
+                                                    <td>{user.id}</td>
+                                                    <td>{user.username}</td>
+                                                    <td>{user.email}</td>
+                                                    <td>{user.phone}</td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="4">No users found</td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            )}
                         </div>
                     )}
                     {activeTab === "manage-content" && (
@@ -86,34 +127,122 @@ const AdminDashboard = () => {
                         </div>
                     )}
                     {activeTab === "reservations" && (
-                        <div className="view-reservations">
-                            <h2>Reservations</h2>
-                            <p>View and manage all reservations made by users.</p>
-                        </div>
-                    )}
+                    <div className="view-reservations">
+                        <h2>Reservations</h2>
+                        {loadingBookings ? (
+                            <p>Loading reservations...</p>
+                        ) : (
+                            <table className="reservations-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Firstname</th>
+                                        <th>Lastname</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Check In</th>
+                                        <th>Check Out</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {bookings.length > 0 ? (
+                                        bookings.map((booking) => (
+                                            <tr key={booking.id}>
+                                                <td>{booking.id}</td>
+                                                <td>{booking.title}</td>
+                                                <td>{booking.Firstname}</td>
+                                                <td>{booking.Lastname}</td>
+                                                <td>{booking.Email}</td>
+                                                <td>{booking.phone}</td>
+                                                <td>{booking.checkIn}</td>
+                                                <td>{booking.CheckOut}</td>
+                                                <td>{booking.Price}</td>
+                                                <td>{booking.Paid}</td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="10">No reservations found</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        )}
+                    </div>
+                )}
+
                     {activeTab === "reserve" && (
                         <div className="reserve-form">
                             <h2>Make a Reservation</h2>
-                            <form>
-                                <div className="form-group">
-                                    <label htmlFor="name">Name</label>
-                                    <input type="text" id="name" name="name" required />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="date">Date</label>
-                                    <input type="date" id="date" name="date" required />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="time">Time</label>
-                                    <input type="time" id="time" name="time" required />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="guests">Number of Guests</label>
-                                    <input type="number" id="guests" name="guests" required />
-                                </div>
-                                <button type="submit" className="reserve-btn">
-                                    Submit Reservation
-                                </button>
+                            <form onSubmit={handleSubmitBooking}>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    placeholder="Title"
+                                    value={bookingData.title || ""}
+                                    onChange={handleBookingChange}
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    name="Firstname"
+                                    placeholder="First Name"
+                                    value={bookingData.Firstname || ""}
+                                    onChange={handleBookingChange}
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    name="Lastname"
+                                    placeholder="Last Name"
+                                    value={bookingData.Lastname || ""}
+                                    onChange={handleBookingChange}
+                                    required
+                                />
+                                <input
+                                    type="email"
+                                    name="Email"
+                                    placeholder="Email"
+                                    value={bookingData.Email || ""}
+                                    onChange={handleBookingChange}
+                                    required
+                                />
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    placeholder="Phone"
+                                    value={bookingData.phone || ""}
+                                    onChange={handleBookingChange}
+                                    required
+                                />
+                                <input
+                                    type="date"
+                                    name="checkIn"
+                                    placeholder="Check In"
+                                    value={bookingData.checkIn || ""}
+                                    onChange={handleBookingChange}
+                                    required
+                                />
+                                <input
+                                    type="date"
+                                    name="CheckOut"
+                                    placeholder="Check Out"
+                                    value={bookingData.CheckOut || ""}
+                                    onChange={handleBookingChange}
+                                    required
+                                />
+                                <input
+                                    type="number"
+                                    name="Price"
+                                    placeholder="Price"
+                                    value={bookingData.Price || ""}
+                                    onChange={handleBookingChange}
+                                    required
+                                />
+                                <button type="submit" className="reserve-btn">Submit Reservation</button>
                             </form>
                         </div>
                     )}
