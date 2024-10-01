@@ -3,7 +3,7 @@ import './Dashboard.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData, getUsers } from "../redux/dbSlice"; 
 import { getBookings, setLoading, addBookings } from "../redux/dbSlice"; // Import necessary actions from dbSlice
-import { fetchDataFirestore } from "../redux/bookingSlice";
+import { fetchDataFirestore , fetchUsers} from "../redux/bookingSlice";
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState("overview");
     const [bookingData, setBookingData] = useState({}); // Add bookingData state
@@ -12,7 +12,12 @@ const AdminDashboard = () => {
     // useEffect(()=> {
     //     fetchDataFirestore(dispatch)
     // },[])
-    const {data, loading, error} = useSelector((state)=> state.booking)
+    const {data, loading, error  ,list} = useSelector((state)=> state.booking);
+
+    console.log(list);
+    
+    
+    
 
     console.log(data);
     
@@ -29,11 +34,21 @@ const AdminDashboard = () => {
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
         
+        if (tabName === "manage-users") {
+            dispatch(getBookings());
+            fetchUsers(dispatch)
+        }
+
+        // Optionally set loading state here if necessary
+        dispatch(setLoading());
+        
         // Fetch bookings when "Reservations" tab is clicked
         if (tabName === "reservations") {
             dispatch(getBookings());
             fetchDataFirestore(dispatch)
         }
+
+
 
         // Optionally set loading state here if necessary
         dispatch(setLoading());
@@ -95,8 +110,8 @@ const AdminDashboard = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {users.length > 0 ? (
-                                            users.map((user) => (
+                                        {list.length > 0 ? (
+                                            list.map((user) => (
                                                 <tr key={user.id}>
                                                     <td>{user.id}</td>
                                                     <td>{user.username}</td>

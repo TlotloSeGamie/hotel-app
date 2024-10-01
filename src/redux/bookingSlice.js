@@ -6,6 +6,7 @@ import { Children } from "react";
 
 const initialState={
     data:[],
+    list: [],
     loading:false,
     error:null
 }
@@ -25,11 +26,17 @@ export const BookingSlice=createSlice({
         setData(state,action){
             state.data=action.payload;
             state.loading=false;
+        } ,
+
+        setUsers(state,action){
+            state.list=action.payload;
+            state.loading=false;
         }
+        
     }
 })
 
-export const { setLoading, setData, setError } = BookingSlice.actions
+export const { setLoading, setData, setError, setUsers } = BookingSlice.actions
 
 export default BookingSlice.reducer
 
@@ -91,6 +98,26 @@ export const fetchDataFirestore=async(dispatch)=>{
                 ...doc.data(),
             }));
             dispatch(setData(data));
+          console.log("Document data is:", docSnap.docs);
+        } else {
+          console.log("No such document!");
+        }
+    }
+    catch(error){
+        dispatch(setError(error.message));
+    }
+  }
+
+  export const fetchUsers=async(dispatch)=>{
+    dispatch(setLoading())
+    try{
+        const docSnap = await getDocs(collection(db,"users"));
+        if (docSnap.docs.length>0) {
+            const data=docSnap.docs.map((doc)=>({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            dispatch(setUsers(data));
           console.log("Document data is:", docSnap.docs);
         } else {
           console.log("No such document!");
