@@ -2,26 +2,18 @@ import React, { useState, useEffect } from "react";
 import './Dashboard.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData, getUsers } from "../redux/dbSlice"; 
-import { getBookings, setLoading, addBookings } from "../redux/dbSlice"; // Import necessary actions from dbSlice
-import { fetchDataFirestore , fetchUsers} from "../redux/bookingSlice";
+import { getBookings, setLoading, addBookings } from "../redux/dbSlice";
+import { fetchDataFirestore, fetchUsers, fetchRooms } from "../redux/bookingSlice"; 
+import Modal from './Modal'; // Ensure this is the correct path for your Modal component
+
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState("overview");
-    const [bookingData, setBookingData] = useState({}); // Add bookingData state
+    const [bookingData, setBookingData] = useState({});
+    const [selectedRoom, setSelectedRoom] = useState(null); // State for the selected room
     const dispatch = useDispatch();
 
-    // useEffect(()=> {
-    //     fetchDataFirestore(dispatch)
-    // },[])
-    const {data, loading, error  ,list} = useSelector((state)=> state.booking);
+    const { data, loading, error, list, rooms } = useSelector((state) => state.booking);
 
-    console.log(list);
-    
-    
-    
-
-    console.log(data);
-    
-    // Fetch users and bookings from Redux
     const userState = useSelector((state) => state.data);
     const bookingState = useSelector((state) => state.booking);
     
@@ -33,41 +25,47 @@ const AdminDashboard = () => {
 
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
-        
+        dispatch(setLoading()); // Dispatch loading action once at the beginning
+
+        if (tabName === "overview") {
+            // Fetch rooms when the overview tab is clicked
+            dispatch(fetchRooms());
+        }
+
         if (tabName === "manage-users") {
             dispatch(getBookings());
-            fetchUsers(dispatch)
+            dispatch(fetchUsers());
         }
 
-        // Optionally set loading state here if necessary
-        dispatch(setLoading());
-        
-        // Fetch bookings when "Reservations" tab is clicked
         if (tabName === "reservations") {
             dispatch(getBookings());
-            fetchDataFirestore(dispatch)
+            dispatch(fetchDataFirestore());
         }
-
-
-
-        // Optionally set loading state here if necessary
-        dispatch(setLoading());
     };
 
     const handleBookingChange = (e) => {
         const { name, value } = e.target;
-        setBookingData({ ...bookingData, [name]: value }); // Update booking data
+        setBookingData({ ...bookingData, [name]: value });
     };
 
     const handleSubmitBooking = (e) => {
         e.preventDefault();
-        dispatch(addBookings(bookingData)); // Dispatch the booking data
-        setBookingData({}); // Reset the form after submission
+        dispatch(addBookings(bookingData));
+        setBookingData({});
+    };
+
+    // Function to open the modal and set the selected room
+    const openRoomModal = (room) => {
+        setSelectedRoom(room);
+    };
+
+    // Function to close the modal
+    const closeRoomModal = () => {
+        setSelectedRoom(null);
     };
 
     return (
         <div className="admin-dashboard">
-            {/* Sidebar navigation */}
             <aside className="sidebar">
                 <h2>Admin Panel</h2>
                 <ul className="sidebar-nav">
@@ -80,20 +78,82 @@ const AdminDashboard = () => {
                 </ul>
             </aside>
 
-            {/* Main content area */}
             <main className="main-content">
                 <header className="admin-header">
                     <h1>Welcome, Admin</h1>
                 </header>
 
                 <section className="content-section">
-                    {/* Render tab content dynamically based on activeTab */}
                     {activeTab === "overview" && (
-                        <div className="dashboard-overview">
-                            <h2>Overview</h2>
-                            <p>Here's a summary of the admin activities.</p>
+                        <div className="manage-rooms">
+                            <h2>Manage Rooms</h2>
+                            {loading ? (
+                                <p>Loading rooms...</p>
+                            ) : (
+                                <table className="rooms-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Picture</th>
+                                            <th>Room Name</th>
+                                            <th>Price</th>
+                                            <th>Bathroom</th>
+                                            <th>Bedroom</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {rooms.length > 0 ? (
+                                            rooms.map((room) => (
+                                                <tr key={room.id}>
+                                                    <td>
+                                                        <img src={room.mainPicture} alt={room.name} className="room-image" />
+                                                    </td>
+                                                    <td>{room.name}</td>
+                                                    <td>{room.price}</td>
+                                                    <td>{room.bathroom}</td>
+                                                    <td>{room.bedroom}</td>
+                                                    <td>
+                                                        <button onClick={() => openRoomModal(room)}>
+                                                            View Details
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="6">No rooms available</td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            )}
                         </div>
                     )}
+
+                    {/* Modal for room details */}
+                    {selectedRoom && (
+                        <Modal onClose={closeRoomModal}>
+                            <div className="room-details">
+                                <h2>{selectedRoom.name}</h2>
+                                <div className="room-images">
+                                    <img src={selectedRoom.mainPicture} alt="Main" className="main-image" />
+                                    {selectedRoom.additionalPictures.map((pic, index) => (
+                                        <img key={index} src={pic} alt={`Additional ${index + 1}`} className="additional-image" />
+                                    ))}
+                                </div>
+                                <p>Price: {selectedRoom.price}</p>
+                                <p>Bathroom: {selectedRoom.bathroom}</p>
+                                <p>Bedroom: {selectedRoom.bedroom}</p>
+                                <p>Highlights:</p>
+                                <ul>
+                                    {selectedRoom.highlights.map((highlight, index) => (
+                                        <li key={index}>{highlight}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </Modal>
+                    )}
+
                     {activeTab === "manage-users" && (
                         <div className="manage-users">
                             <h2>Manage Users</h2>
@@ -142,122 +202,121 @@ const AdminDashboard = () => {
                         </div>
                     )}
                     {activeTab === "reservations" && (
-                    <div className="view-reservations">
-                        <h2>Reservations</h2>
-                        {loadingBookings ? (
-                            <p>Loading reservations...</p>
-                        ) : (
-                            <table className="reservations-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Title</th>
-                                        <th>Firstname</th>
-                                        <th>Lastname</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Check In</th>
-                                        <th>Check Out</th>
-                                        <th>Price</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {bookings.length > 0 ? (
-                                        bookings.map((booking) => (
-                                            <tr key={booking.id}>
-                                                <td>{booking.id}</td>
-                                                <td>{booking.title}</td>
-                                                <td>{booking.Firstname}</td>
-                                                <td>{booking.Lastname}</td>
-                                                <td>{booking.Email}</td>
-                                                <td>{booking.phone}</td>
-                                                <td>{booking.checkIn}</td>
-                                                <td>{booking.CheckOut}</td>
-                                                <td>{booking.Price}</td>
-                                                <td>{booking.Paid}</td>
-                                            </tr>
-                                        ))
-                                    ) : (
+                        <div className="view-reservations">
+                            <h2>Reservations</h2>
+                            {loadingBookings ? (
+                                <p>Loading reservations...</p>
+                            ) : (
+                                <table className="reservations-table">
+                                    <thead>
                                         <tr>
-                                            <td colSpan="10">No reservations found</td>
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>Firstname</th>
+                                            <th>Lastname</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Check In</th>
+                                            <th>Check Out</th>
+                                            <th>Price</th>
+                                            <th>Status</th>
                                         </tr>
-                                    )}
-                                </tbody>
-                            </table>
-                        )}
-                    </div>
-                )}
-
+                                    </thead>
+                                    <tbody>
+                                        {bookings.length > 0 ? (
+                                            bookings.map((booking) => (
+                                                <tr key={booking.id}>
+                                                    <td>{booking.id}</td>
+                                                    <td>{booking.title}</td>
+                                                    <td>{booking.Firstname}</td>
+                                                    <td>{booking.Lastname}</td>
+                                                    <td>{booking.Email}</td>
+                                                    <td>{booking.phone}</td>
+                                                    <td>{booking.checkIn}</td>
+                                                    <td>{booking.CheckOut}</td>
+                                                    <td>{booking.Price}</td>
+                                                    <td>{booking.status}</td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="10">No reservations found</td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
+                    )}
                     {activeTab === "reserve" && (
-                        <div className="reserve-form">
+                        <div className="reserve">
                             <h2>Make a Reservation</h2>
                             <form onSubmit={handleSubmitBooking}>
                                 <input
                                     type="text"
                                     name="title"
-                                    placeholder="Title"
-                                    value={bookingData.title || ""}
+                                    value={bookingData.title || ''}
                                     onChange={handleBookingChange}
+                                    placeholder="Title"
                                     required
                                 />
                                 <input
                                     type="text"
                                     name="Firstname"
-                                    placeholder="First Name"
-                                    value={bookingData.Firstname || ""}
+                                    value={bookingData.Firstname || ''}
                                     onChange={handleBookingChange}
+                                    placeholder="First Name"
                                     required
                                 />
                                 <input
                                     type="text"
                                     name="Lastname"
-                                    placeholder="Last Name"
-                                    value={bookingData.Lastname || ""}
+                                    value={bookingData.Lastname || ''}
                                     onChange={handleBookingChange}
+                                    placeholder="Last Name"
                                     required
                                 />
                                 <input
                                     type="email"
                                     name="Email"
-                                    placeholder="Email"
-                                    value={bookingData.Email || ""}
+                                    value={bookingData.Email || ''}
                                     onChange={handleBookingChange}
+                                    placeholder="Email"
                                     required
                                 />
                                 <input
                                     type="tel"
                                     name="phone"
-                                    placeholder="Phone"
-                                    value={bookingData.phone || ""}
+                                    value={bookingData.phone || ''}
                                     onChange={handleBookingChange}
+                                    placeholder="Phone"
                                     required
                                 />
                                 <input
                                     type="date"
                                     name="checkIn"
-                                    placeholder="Check In"
-                                    value={bookingData.checkIn || ""}
+                                    value={bookingData.checkIn || ''}
                                     onChange={handleBookingChange}
+                                    placeholder="Check In"
                                     required
                                 />
                                 <input
                                     type="date"
                                     name="CheckOut"
-                                    placeholder="Check Out"
-                                    value={bookingData.CheckOut || ""}
+                                    value={bookingData.CheckOut || ''}
                                     onChange={handleBookingChange}
+                                    placeholder="Check Out"
                                     required
                                 />
                                 <input
                                     type="number"
                                     name="Price"
-                                    placeholder="Price"
-                                    value={bookingData.Price || ""}
+                                    value={bookingData.Price || ''}
                                     onChange={handleBookingChange}
+                                    placeholder="Price"
                                     required
                                 />
-                                <button type="submit" className="reserve-btn">Submit Reservation</button>
+                                <button type="submit">Submit</button>
                             </form>
                         </div>
                     )}

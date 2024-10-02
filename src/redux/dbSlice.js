@@ -79,7 +79,7 @@ export const addBookings = async (dispatch,bookingData) => {
     console.log("Data to push:", bookingData);
     await addDoc(collection(db, "bookings"), bookingData);
     console.log("Booking added successfully!");
-    dispatch(fetchData()); // Re-fetch the bookings to update the state
+    dispatch(fetchData()); 
   } catch (error) {
     dispatch(setError(error.message));
   }
@@ -111,10 +111,10 @@ export const getUsers = () => async (dispatch) => {
       id: doc.id,
       ...doc.data(),
     }));
-    console.log("Fetched users:", data);  // Add this to verify data
+    console.log("Fetched users:", data);  
     dispatch(setData(data));
   } catch (error) {
-    console.log("Error fetching users:", error);  // Add this for error checking
+    console.log("Error fetching users:", error);  
     dispatch(setError(error.message));
   }
 };

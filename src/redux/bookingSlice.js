@@ -7,6 +7,7 @@ import { Children } from "react";
 const initialState={
     data:[],
     list: [],
+    rooms: [],
     loading:false,
     error:null
 }
@@ -31,12 +32,17 @@ export const BookingSlice=createSlice({
         setUsers(state,action){
             state.list=action.payload;
             state.loading=false;
+        } ,
+
+        setRooms(state,action){
+            state.rooms=action.payload;
+            state.loading=false;
         }
         
     }
 })
 
-export const { setLoading, setData, setError, setUsers } = BookingSlice.actions
+export const { setLoading, setData, setError, setUsers, setRooms } = BookingSlice.actions
 
 export default BookingSlice.reducer
 
@@ -112,7 +118,7 @@ export const fetchDataFirestore=async(dispatch)=>{
     dispatch(setLoading())
     try{
         const docSnap = await getDocs(collection(db,"users"));
-        if (docSnap.docs.length>0) {
+        if (docSnap.docs.length> 0) {
             const data=docSnap.docs.map((doc)=>({
                 id: doc.id,
                 ...doc.data(),
@@ -121,6 +127,26 @@ export const fetchDataFirestore=async(dispatch)=>{
           console.log("Document data is:", docSnap.docs);
         } else {
           console.log("No such document!");
+        }
+    }
+    catch(error){
+        dispatch(setError(error.message));
+    }
+  }
+
+  export const fetchRooms=async(dispatch)=>{
+    dispatch(setLoading())
+    try{
+        const docSnap = await getDocs(collection(db,"allRooms"));
+        if (docSnap.docs.length> 0) {
+            const data=docSnap.docs.map((doc)=>({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            dispatch(setRooms(data));
+          console.log("Room data fetched:", docSnap.docs);
+        } else {
+          console.log("No rooms available!");
         }
     }
     catch(error){
