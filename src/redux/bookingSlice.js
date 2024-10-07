@@ -9,7 +9,11 @@ const initialState={
     list: [],
     room: [],
     loading:false,
-    error:null
+    error:null,
+    totalRooms: 0, 
+    totalUsers: 0, 
+    bookedUsers: 0,
+    totalPrice: 0,
 }
 
 export const BookingSlice=createSlice({
@@ -37,12 +41,19 @@ export const BookingSlice=createSlice({
         setRooms(state,action){
             state.room=action.payload;
             state.loading=false;
+        },
+        setSummary(state, action) {
+            const { totalRooms, totalUsers, bookedUsers, totalPrice } = action.payload;
+            state.totalRooms = totalRooms;
+            state.totalUsers = totalUsers;
+            state.bookedUsers = bookedUsers;
+            state.totalPrice = totalPrice;
         }
         
     }
 })
 
-export const { setLoading, setData, setError, setUsers, setRooms } = BookingSlice.actions
+export const { setLoading, setData, setError, setUsers, setRooms, setSummary } = BookingSlice.actions
 
 export default BookingSlice.reducer
 
@@ -152,4 +163,23 @@ export const fetchDataFirestore=async(dispatch)=>{
     catch(error){
         dispatch(setError(error.message));
     }
-  }
+  };
+
+  export const fetchSummaryData = async (dispatch) => {
+    dispatch(setLoading());
+    try {
+        const bookingsSnapshot = await getDocs(collection(db, "Bookings"));
+        const usersSnapshot = await getDocs(collection(db, "users"));
+        const roomsSnapshot = await getDocs(collection(db, "rooms")); // Assuming "rooms" is your collection for rooms
+
+        const bookings = bookingsSnapshot.docs.map((doc) => doc.data());
+        const totalRooms = roomsSnapshot.docs.length;
+        const totalUsers = usersSnapshot.docs.length;
+        const bookedUsers = new Set(bookings.map((booking) => booking.Email)).size;
+        const totalPrice = bookings.reduce((sum, booking) => sum + (parseFloat(booking.Price) || 0), 0);
+
+        dispatch(setSummary({ totalRooms, totalUsers, bookedUsers, totalPrice }));
+    } catch (error) {
+        dispatch(setError(error.message));
+    }
+};

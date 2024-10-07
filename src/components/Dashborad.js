@@ -3,18 +3,18 @@ import './Dashboard.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData, getUsers } from "../redux/dbSlice"; 
 import { getBookings, setLoading, addBookings } from "../redux/dbSlice";
-import { fetchDataFirestore , fetchUsers, fetchRooms} from "../redux/bookingSlice";
+import { fetchDataFirestore , fetchUsers, fetchRooms, fetchSummaryData } from "../redux/bookingSlice";
 import Modal from './Modal';
 import BookingForm from "./BookingForm";
 
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState("overview");
     const [bookingData, setBookingData] = useState({}); 
-    const [selectedRoom, setSelectedRoom] = useState(null);  // Define selectedRoom state
+    const [selectedRoom, setSelectedRoom] = useState(null);  
     const dispatch = useDispatch();
     const [rooms, setRooms] = useState('')
 
-    const {data, loading, error  ,list, room } = useSelector((state)=> state.booking);
+    const {data, loading, error  ,list, room, totalRooms, totalUsers, bookedUsers, totalPrice  } = useSelector((state)=> state.booking);
     // const {Bookdata, Bookloading, Bookerror  ,Booklist, Bookroom } = useSelector((state)=> state.booking);
         console.log("data:", data);
         console.log("list of users:", list);
@@ -36,6 +36,11 @@ const AdminDashboard = () => {
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
         
+        if (tabName === "overview") {
+          dispatch(getBookings());
+          fetchSummaryData(dispatch)
+        }
+
         if (tabName === "reserve") {
             // dispatch(getBookings());
             fetchRooms(dispatch)
@@ -44,6 +49,10 @@ const AdminDashboard = () => {
         if (tabName === "manage-users") {
             dispatch(getBookings());
             fetchUsers(dispatch)
+        }
+        
+        if (tabName === "manage-rooms") {
+          fetchRooms(dispatch);
         }
 
         dispatch(setLoading());
@@ -56,13 +65,12 @@ const AdminDashboard = () => {
         dispatch(setLoading());
     };
 
-    // Handle room modal
     const openRoomModal = (room) => {
-        setSelectedRoom(room);  // Set the selected room for modal
+        setSelectedRoom(room); 
     };
 
     const closeRoomModal = () => {
-        setSelectedRoom(null);  // Close the modal by clearing the selected room
+        setSelectedRoom(null);  
     };
 
     const handleBookingChange = (e) => {
@@ -92,6 +100,12 @@ const AdminDashboard = () => {
               onClick={() => handleTabClick("manage-users")}
             >
               Manage Users
+            </li>
+            <li
+              className={activeTab === "manage-rooms" ? "active" : ""}
+              onClick={() => handleTabClick("manage-rooms")}
+            >
+              Manage Rooms
             </li>
             <li
               className={activeTab === "manage-content" ? "active" : ""}
@@ -125,15 +139,18 @@ const AdminDashboard = () => {
             <h1>Welcome, Admin</h1>
           </header>
           <section className="content-section">
-            
           {activeTab === "overview" && (
-              <div className="overview">
-                <h2>View</h2>
-                <p>View statistics.</p>
-              </div>
-            )}
-
-            {activeTab === "reserve" && (
+                  <div className="dashboard-overview">
+                      <h2>Overview</h2>
+                      <ul>
+                          <li>Total Rooms: {totalRooms}</li>
+                          <li>Total Users: {totalUsers}</li>
+                          <li>Total Booked Users: {bookedUsers}</li>
+                          <li>Total Price of Rooms Booked: R{totalPrice.toFixed(2)}</li>
+                      </ul>
+                  </div>
+              )}
+            {activeTab === "manage-rooms" && (
               <div className="manage-rooms">
                 <h2>Manage Rooms</h2>
                 {loading ? (
@@ -142,7 +159,6 @@ const AdminDashboard = () => {
                   <table className="rooms-table">
                     <thead>
                       <tr>
-                        <th>Picture</th>
                         <th>Room Name</th>
                         <th>Price</th>
                         <th>Bathroom</th>
@@ -154,13 +170,6 @@ const AdminDashboard = () => {
                       {data.length > 0 ? (
                         data.map((room) => (
                           <tr key={room.id}>
-                            <td>
-                              <img
-                                src={room.mainPicture}
-                                alt={room.name}
-                                className="room-image"
-                              />
-                            </td>
                             <td>{room.name}</td>
                             <td>{room.price}</td>
                             <td>{room.bathroom}</td>
@@ -174,45 +183,13 @@ const AdminDashboard = () => {
                         ))
                       ) : (
                         <tr>
-                          <td colSpan="6">No rooms available</td>
+                          <td colSpan="5">No rooms available</td>
                         </tr>
                       )}
                     </tbody>
                   </table>
                 )}
               </div>
-            )}
-
-            {selectedRoom && (
-              <Modal onClose={closeRoomModal}>
-                <div className="room-details">
-                  <h2>{selectedRoom.name}</h2>
-                  <div className="room-images">
-                    <img
-                      src={selectedRoom.mainPicture}
-                      alt="Main"
-                      className="main-image"
-                    />
-                    {selectedRoom.additionalPictures.map((pic, index) => (
-                      <img
-                        key={index}
-                        src={pic}
-                        alt={`Additional ${index + 1}`}
-                        className="additional-image"
-                      />
-                    ))}
-                  </div>
-                  <p>Price: {selectedRoom.price}</p>
-                  <p>Bathroom: {selectedRoom.bathroom}</p>
-                  <p>Bedroom: {selectedRoom.bedroom}</p>
-                  <p>Highlights:</p>
-                  <ul>
-                    {selectedRoom.highlights.map((highlight, index) => (
-                      <li key={index}>{highlight}</li>
-                    ))}
-                  </ul>
-                </div>
-              </Modal>
             )}
             {activeTab === "manage-users" && (
               <div className="manage-users">
@@ -248,6 +225,7 @@ const AdminDashboard = () => {
                   </table>
                 )}
               </div>
+              
             )}
             {activeTab === "manage-content" && (
               <div className="manage-content">
