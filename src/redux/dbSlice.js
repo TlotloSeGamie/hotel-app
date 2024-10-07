@@ -27,7 +27,7 @@ const dbSlice = createSlice({
       state.loading = false;
     },
     addBookingToState(state, action) {
-      state.data.push(action.payload); // Add the new booking to the state
+      state.data.push(action.payload); 
     },
   },
 });

@@ -7,7 +7,7 @@ import { Children } from "react";
 const initialState={
     data:[],
     list: [],
-    room: [],
+    roomData: [],
     loading:false,
     error:null,
     totalRooms: 0, 
@@ -37,7 +37,10 @@ export const BookingSlice=createSlice({
             state.list=action.payload;
             state.loading=false;
         } ,
-
+        setRoomData(state, action) {
+            state.roomData = action.payload;
+            state.loading = false;
+        },
         setRooms(state,action){
             state.room=action.payload;
             state.loading=false;
@@ -53,7 +56,7 @@ export const BookingSlice=createSlice({
     }
 })
 
-export const { setLoading, setData, setError, setUsers, setRooms, setSummary } = BookingSlice.actions
+export const { setLoading, setData, setError, setUsers, setRoomData, setRooms, setSummary } = BookingSlice.actions
 
 export default BookingSlice.reducer
 
@@ -114,7 +117,7 @@ export const fetchDataFirestore=async(dispatch)=>{
                 id: doc.id,
                 ...doc.data(),
             }));
-            dispatch(setData(data));
+            dispatch(setRoomData(data));
           console.log("Document data is:", docSnap.docs);
         } else {
           console.log("No such document!");

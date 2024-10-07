@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Dashboard.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData, getUsers } from "../redux/dbSlice"; 
 import { getBookings, setLoading, addBookings } from "../redux/dbSlice";
 import { fetchDataFirestore , fetchUsers, fetchRooms, fetchSummaryData, setRooms } from "../redux/bookingSlice";
 import Modal from './Modal';
@@ -17,13 +16,15 @@ const AdminDashboard = () => {
     const [rooms, setRooms] = useState('');
     const [guests, setGuests] = useState('');
     const [children, setChildren] = useState('');
-    const dispatch = useDispatch();
+    // const [data, setData] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
-    const {data, loading, error  ,list, room, totalRooms, totalUsers, bookedUsers, totalPrice  } = useSelector((state)=> state.booking);
+    const dispatch = useDispatch();
+    const {roomData,/**/ data, loading, error  ,list, room, totalRooms, totalUsers, bookedUsers, totalPrice  } = useSelector((state)=> state.booking);
     // const {Bookdata, Bookloading, Bookerror  ,Booklist, Bookroom } = useSelector((state)=> state.booking);
         console.log("data:", data);
         console.log("list of users:", list);
-        console.log("Rooms:", room);
+        console.log("Rooms:", roomData);
         
         
         
@@ -72,12 +73,12 @@ const AdminDashboard = () => {
 
     const openRoomModal = (room) => {
       setSelectedRoom(room);
-      setIsBookingModalOpen(true); // Open modal
+      setIsBookingModalOpen(true); 
   };
 
   const closeRoomModal = () => {
       setSelectedRoom(null);
-      setIsBookingModalOpen(false); // Close modal
+      setIsBookingModalOpen(false); 
   };
 
     const handleBookingChange = (e) => {
@@ -90,6 +91,11 @@ const AdminDashboard = () => {
         dispatch(addBookings(bookingData)); 
         setBookingData({}); 
     };
+
+    const filteredRooms = data.filter(room => 
+      room.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      room.price.toString().includes(searchQuery)
+  );
 
     return (
       <div className="admin-dashboard">
@@ -310,7 +316,7 @@ const AdminDashboard = () => {
                     )}
                 </section>
 
-                {isBookingModalOpen && selectedRoom && ( // Conditional rendering for modal
+                {isBookingModalOpen && selectedRoom && ( 
                     <div className="booking-modal">
                         <div className="modal-content">
                             <h2>Booking Details</h2>
