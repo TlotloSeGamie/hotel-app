@@ -3,16 +3,21 @@ import './Dashboard.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData, getUsers } from "../redux/dbSlice"; 
 import { getBookings, setLoading, addBookings } from "../redux/dbSlice";
-import { fetchDataFirestore , fetchUsers, fetchRooms, fetchSummaryData } from "../redux/bookingSlice";
+import { fetchDataFirestore , fetchUsers, fetchRooms, fetchSummaryData, setRooms } from "../redux/bookingSlice";
 import Modal from './Modal';
 import BookingForm from "./BookingForm";
 
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState("overview");
     const [bookingData, setBookingData] = useState({}); 
-    const [selectedRoom, setSelectedRoom] = useState(null);  
+    const [selectedRoom, setSelectedRoom] = useState(null); 
+    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+    const [checkInDate, setCheckInDate] = useState("");
+    const [checkOutDate, setCheckOutDate] = useState("");
+    const [rooms, setRooms] = useState('');
+    const [guests, setGuests] = useState('');
+    const [children, setChildren] = useState('');
     const dispatch = useDispatch();
-    const [rooms, setRooms] = useState('')
 
     const {data, loading, error  ,list, room, totalRooms, totalUsers, bookedUsers, totalPrice  } = useSelector((state)=> state.booking);
     // const {Bookdata, Bookloading, Bookerror  ,Booklist, Bookroom } = useSelector((state)=> state.booking);
@@ -66,12 +71,14 @@ const AdminDashboard = () => {
     };
 
     const openRoomModal = (room) => {
-        setSelectedRoom(room); 
-    };
+      setSelectedRoom(room);
+      setIsBookingModalOpen(true); // Open modal
+  };
 
-    const closeRoomModal = () => {
-        setSelectedRoom(null);  
-    };
+  const closeRoomModal = () => {
+      setSelectedRoom(null);
+      setIsBookingModalOpen(false); // Close modal
+  };
 
     const handleBookingChange = (e) => {
         const { name, value } = e.target;
@@ -89,46 +96,25 @@ const AdminDashboard = () => {
         <aside className="sidebar">
           <h2>Admin Panel</h2>
           <ul className="sidebar-nav">
-            <li
-              className={activeTab === "overview" ? "active" : ""}
-              onClick={() => handleTabClick("overview")}
-            >
+            <li className={activeTab === "overview" ? "active" : ""} onClick={() => handleTabClick("overview")}>
               Overview
             </li>
-            <li
-              className={activeTab === "manage-users" ? "active" : ""}
-              onClick={() => handleTabClick("manage-users")}
-            >
+            <li className={activeTab === "manage-users" ? "active" : ""} onClick={() => handleTabClick("manage-users")}>
               Manage Users
             </li>
-            <li
-              className={activeTab === "manage-rooms" ? "active" : ""}
-              onClick={() => handleTabClick("manage-rooms")}
-            >
+            <li className={activeTab === "manage-rooms" ? "active" : ""}onClick={() => handleTabClick("manage-rooms")}>
               Manage Rooms
             </li>
-            <li
-              className={activeTab === "manage-content" ? "active" : ""}
-              onClick={() => handleTabClick("manage-content")}
-            >
+            <li className={activeTab === "manage-content" ? "active" : ""}onClick={() => handleTabClick("manage-content")} >
               Manage Content
             </li>
-            <li
-              className={activeTab === "reports" ? "active" : ""}
-              onClick={() => handleTabClick("reports")}
-            >
+            <li className={activeTab === "reports" ? "active" : ""}onClick={() => handleTabClick("reports")}>
               View Reports
             </li>
-            <li
-              className={activeTab === "reservations" ? "active" : ""}
-              onClick={() => handleTabClick("reservations")}
-            >
+            <li className={activeTab === "reservations" ? "active" : ""} onClick={() => handleTabClick("reservations")}>
               Reservations
             </li>
-            <li
-              className={activeTab === "reserve" ? "active" : ""}
-              onClick={() => handleTabClick("reserve")}
-            >
+            <li className={activeTab === "reserve" ? "active" : ""} onClick={() => handleTabClick("reserve")} >
               Reserve
             </li>
           </ul>
@@ -288,90 +274,119 @@ const AdminDashboard = () => {
             )}
 
             {activeTab === "reserve" && (
-              // <div className="reserve-room">
-              //     <h2>Reserve Room</h2>
-              //     <form onSubmit={handleSubmitBooking}>
-              //         <label htmlFor="title">Title:</label>
-              //         <input
-              //             type="text"
-              //             id="title"
-              //             name="title"
-              //             value={bookingData.title || ""}
-              //             onChange={handleBookingChange}
-              //         />
-              //         <label htmlFor="Firstname">First Name:</label>
-              //         <input
-              //             type="text"
-              //             id="Firstname"
-              //             name="Firstname"
-              //             value={bookingData.Firstname || ""}
-              //             onChange={handleBookingChange}
-              //         />
-              //         <label htmlFor="Lastname">Last Name:</label>
-              //         <input
-              //             type="text"
-              //             id="Lastname"
-              //             name="Lastname"
-              //             value={bookingData.Lastname || ""}
-              //             onChange={handleBookingChange}
-              //         />
-              //         <label htmlFor="Email">Email:</label>
-              //         <input
-              //             type="email"
-              //             id="Email"
-              //             name="Email"
-              //             value={bookingData.Email || ""}
-              //             onChange={handleBookingChange}
-              //         />
-              //         <label htmlFor="phone">Phone:</label>
-              //         <input
-              //             type="tel"
-              //             id="phone"
-              //             name="phone"
-              //             value={bookingData.phone || ""}
-              //             onChange={handleBookingChange}
-              //         />
-              //         <label htmlFor="checkIn">Check In:</label>
-              //         <input
-              //             type="date"
-              //             id="checkIn"
-              //             name="checkIn"
-              //             value={bookingData.checkIn || ""}
-              //             onChange={handleBookingChange}
-              //         />
-              //         <label htmlFor="CheckOut">Check Out:</label>
-              //         <input
-              //             type="date"
-              //             id="CheckOut"
-              //             name="CheckOut"
-              //             value={bookingData.CheckOut || ""}
-              //             onChange={handleBookingChange}
-              //         />
-              //         <label htmlFor="Price">Price:</label>
-              //         <input
-              //             type="text"
-              //             id="Price"
-              //             name="Price"
-              //             value={bookingData.Price || ""}
-              //             onChange={handleBookingChange}
-              //         />
-              //         <label htmlFor="Paid">Status:</label>
-              //         <input
-              //             type="text"
-              //             id="Paid"
-              //             name="Paid"
-              //             value={bookingData.Paid || ""}
-              //             onChange={handleBookingChange}
-              //         />
-              //         <button type="submit">Reserve</button>
-              //     </form>
-              // </div>
-              <>
-                <button className="reserve-room">RESERVE ROOM</button>
-              </>
-            )}
-          </section>
-        </main>
+              <div className="reserve-room">
+                  <h2>Reserve Room</h2>
+                  {loading ? (
+                                <p>Loading rooms...</p>
+                            ) : (
+                                <table className="rooms-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Room Name</th>
+                                            <th>Price</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {data.length > 0 ? (
+                                            data.map((room) => (
+                                                <tr key={room.id}>
+                                                    <td>{room.name}</td>
+                                                    <td>{room.price}</td>
+                                                    <td>
+                                                        <button onClick={() => openRoomModal(room)}>Reserve</button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="3">No rooms available</td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
+                    )}
+                </section>
+
+                {isBookingModalOpen && selectedRoom && ( // Conditional rendering for modal
+                    <div className="booking-modal">
+                        <div className="modal-content">
+                            <h2>Booking Details</h2>
+                            <div className="room-info">
+                                <img src={selectedRoom.image} alt={selectedRoom.name} />
+                                <div className="info-text">
+                                  <h3>{selectedRoom.name}</h3>
+                                  <p>Price: R{selectedRoom.price}</p>
+                                  <ul></ul>
+                                  <div className="select-container">
+                                  <div className="date-container">
+                                      <input
+                                          type="date"
+                                          placeholder="Check-in"
+                                          value={checkInDate}
+                                          onChange={(e) => setCheckInDate(e.target.value)}
+                                          className="date-input"
+                                          onFocus={(e) => e.target.showPicker()}
+                                      />
+                                  </div>
+
+                                  <div className="date-container">
+                                      <input
+                                          type="date"
+                                          placeholder="Check-out"
+                                          value={checkOutDate}
+                                          onChange={(e) => setCheckOutDate(e.target.value)}
+                                          className="date-input"
+                                          onFocus={(e) => e.target.showPicker()}
+                                      />
+                                  </div>
+
+                                  
+                                        <select
+                                            className="rooms-input"
+                                            value={rooms}
+                                            onChange={(e) => setRooms(e.target.value)}
+                                        >
+                                            <option value="" disabled>Select Rooms</option>
+                                            {[...Array(15).keys()].map(num => (
+                                                <option key={num + 1} value={num + 1}>{num + 1} Rooms</option>
+                                            ))}
+                                        </select>
+                                        <select
+                                            className="guest-input"
+                                            value={guests}
+                                            onChange={(e) => setGuests(e.target.value)}
+                                        >
+                                            <option value="" disabled>Select Guests</option>
+                                            {[...Array(15).keys()].map(num => (
+                                                <option key={num + 1} value={num + 1}>{num + 1} Guests</option>
+                                            ))}
+                                        </select>
+                                        <select
+                                            className="children-input"
+                                            value={children}
+                                            onChange={(e) => setChildren(e.target.value)}
+                                        >
+                                            <option value="" disabled>Select Children</option>
+                                            {[...Array(15).keys()].map(num => (
+                                                <option key={num + 1} value={num + 1}>{num + 1} Children</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <BookingForm
+                                roomId={selectedRoom.id}
+                                onChange={handleBookingChange}
+                                onSubmit={handleSubmitBooking}
+                            />
+                            <button onClick={closeRoomModal}>Close</button>
+                        </div>
+                    </div>
+                )}
+            </main>
       </div>
     );
 };
