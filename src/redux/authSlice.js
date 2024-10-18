@@ -4,10 +4,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createUserWithEmailAndPassword,
   signInWithEmailAndPassword, signOut,sendPasswordResetEmail,} from "firebase/auth";
 import { auth, db } from '../config/firebase';
-import { setDoc, doc, getDoc } from "firebase/firestore";
+import { setDoc, doc, getDoc, updateDoc  } from "firebase/firestore";
 
 const initialState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem('user')) || null,
   loading: false,
   error: null,
   message: null,
@@ -25,6 +25,7 @@ const authSlice = createSlice({
     setUser(state, action) {
       state.user = action.payload;
       state.loading = false;
+      localStorage.setItem('user', JSON.stringify(action.payload));
     },
     setError(state, action) {
       state.error = action.payload;
@@ -41,6 +42,7 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.message = null;
+      localStorage.removeItem('user');
     },
   },
 });
@@ -70,6 +72,7 @@ export const fetchUserDetails = (uid) => async (dispatch) => {
         email: userData.email,
         userName: userData.userName,
         phone: userData.phone,
+        profileImage: userData.profileImage || null,
       };
       dispatch(setUser(combinedUser));
     } else {
@@ -80,6 +83,15 @@ export const fetchUserDetails = (uid) => async (dispatch) => {
   }
 };
 
+export const updateProfileImage = (uid, imageUrl) => async (dispatch) => {
+  try {
+    await updateDoc(doc(db, "users", uid), { profileImage: imageUrl });
+    // Optionally, you can fetch user details again to refresh the user state
+    dispatch(fetchUserDetails(uid));
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+};
 
 export const signUp = ({ email, password, phone, userName }) => async (dispatch) => {
   dispatch(setLoading());

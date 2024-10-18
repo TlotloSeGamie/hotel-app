@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { performLogout } from '../redux/authSlice'; 
+import { performLogout, updateProfileImage } from '../redux/authSlice'; 
 import { setUser } from '../redux/authSlice'; 
 import "./Navbar.css";
 import logo from '../images/Screenshot-logo.jpg';
@@ -11,14 +11,21 @@ import { FaCalendarCheck } from 'react-icons/fa'
 const Navbar = () => {
   const [shrink, setShrink] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showProfileModal, setShowProfileModal] = useState(false); 
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [profileImage, setProfileImage] = useState(null) 
   const user = useSelector((state) => state.auth.user); 
   const dispatch = useDispatch();
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user'); 
+    const storedProfileImage = localStorage.getItem('profileImage');
+
     if (storedUser) {
       dispatch(setUser(JSON.parse(storedUser))); 
+    }
+
+    if (storedProfileImage) {
+      setProfileImage(storedProfileImage); 
     }
   }, [dispatch]);
 
@@ -41,10 +48,29 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('user'); 
+    localStorage.removeItem('profileImage');
     dispatch(performLogout());
     setShowProfileModal(false); 
   };
 
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result); 
+        localStorage.setItem('profileImage', reader.result); 
+      };
+      
+      if (user) {
+        dispatch(updateProfileImage(user.uid, reader.result)); // Pass the uploaded image to Firestore
+      }
+      reader.readAsDataURL(file);
+    }
+  };
+
+  
   return (
     <div className={`nav-top ${shrink ? 'shrink' : ''}`}>
       <div className="nav-container">
@@ -97,10 +123,21 @@ const Navbar = () => {
                         />
                       </div> */}
                       <div className='edit-profile'>
-                        <FaUserCircle size={210} color="#0282c3" className='circle'/>
-                        <button className='edit-button'> edit</button>
+                         <input
+                          type="file"
+                          id="profile-image-upload"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          style={{ display: 'none' }} // Hide the file input
+                        />
+                        <label htmlFor="profile-image-upload" className="circle-label">
+                          {profileImage ? (
+                            <img src={profileImage} alt="Profile" className="profile-image-large" />
+                          ) : (
+                            <FaUserCircle size={210} color="#0282c3" className='circle' />
+                          )}
+                        </label>
                       </div>
-                      {/* {user.userName} */}
                         <ul>
                           <li><strong>Username:</strong> {user.userName}</li>
                           <li><strong>Email:</strong> {user.email}</li>
@@ -113,9 +150,9 @@ const Navbar = () => {
                           <li><a href='#' className='booking-list'>Favourites <FaHeart size={30} color="#ff0000" /></a></li>
                         </ul>
                       </div>
-                      <button onClick={handleLogout} className="logout-btn">LOGOUT</button>
                       <button onClick={toggleProfileModal} className="close-btn">CLOSE</button>
-                    </div>
+                      <button onClick={handleLogout} className="logout-btn">LOGOUT</button>
+                      </div>
                   </div>
                 </div>
               )}
