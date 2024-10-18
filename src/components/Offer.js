@@ -34,32 +34,32 @@ const Offer = () => {
                     <img src={relax} alt="Comfortable rest" />
                     <h5><u>Comfortable rest</u>
                         <br />
-                        At Da Gamie Hotel & Resort, relaxation is key. Our spacious rooms, with plush bedding and serene décor, offer a peaceful retreat. Enjoy restful nights
-                        and wake up refreshed, or unwind outdoors in our tranquil gardens and poolside lounges.
+                        {/* At Da Gamie Hotel & Resort, relaxation is key. Our spacious rooms, with plush bedding and serene décor, offer a peaceful retreat. Enjoy restful nights
+                        and wake up refreshed, or unwind outdoors in our tranquil gardens and poolside lounges. */}
                     </h5>
                 </div>
                 <div className="spa">
                     <img src={spa} alt="Spa Treatments" />
                     <h5><u>Spa Treatments</u>
                         <br />
-                        Relax and rejuvenate with soothing spa treatments at Da Gamie. Our expert therapists offer massages,
-                        facials, and holistic therapies designed to refresh your body and mind.
+                        {/* Relax and rejuvenate with soothing spa treatments at Da Gamie. Our expert therapists offer massages,
+                        facials, and holistic therapies designed to refresh your body and mind. */}
                     </h5>
                 </div>
                 <div className="food">
                     <img src={food} alt="Delicious Food" />
                     <h5><u>Delicious Food</u>
                         <br />
-                        Indulge in delicious, locally-sourced meals at Da Gamie. From gourmet fine dining to casual bites, our restaurants 
-                        offer diverse, flavorful dishes that cater to every taste.
+                        {/* Indulge in delicious, locally-sourced meals at Da Gamie. From gourmet fine dining to casual bites, our restaurants 
+                        offer diverse, flavorful dishes that cater to every taste. */}
                     </h5>
                 </div>
                 <div className="best">
                    <img src={services} alt="Best Service" />
                     <h5><u>Best Service</u>
                         <br />
-                        We pride ourselves on providing exceptional service at Da Gamie. Our attentive staff ensures every detail is handled, offering
-                        personalized care to make your stay seamless and enjoyable.
+                        {/* We pride ourselves on providing exceptional service at Da Gamie. Our attentive staff ensures every detail is handled, offering
+                        personalized care to make your stay seamless and enjoyable. */}
                     </h5>
                 </div>
             </div>

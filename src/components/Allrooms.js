@@ -8,12 +8,16 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { FaHeart, FaShareAlt } from 'react-icons/fa';
 import { fetchData } from "../redux/dbSlice";
-import Checkout from "./Checkout";
 
 const Allrooms = () => {
+  // Define today's and tomorrow's date
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [checkInDate, setCheckInDate] = useState("");
+  const [checkInDate, setCheckInDate] = useState(today.toISOString().split('T')[0]);
   const [checkOutDate, setCheckOutDate] = useState("");
   const [numGuests, setNumGuests] = useState(1);
   const [numRooms, setNumRooms] = useState(1);
@@ -23,14 +27,7 @@ const Allrooms = () => {
 
   const { data, loading, error } = useSelector((state) => state.data);
   const dispatch = useDispatch();
-  localStorage.setItem("extraDetails", JSON.stringify({
-    checkInDate,
-    checkOutDate,
-    numGuests,
-    numChildren,
-    numRooms,
-    totalPrice
-  }));
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchData());
@@ -49,13 +46,11 @@ const Allrooms = () => {
     }
   }, [checkInDate, checkOutDate, data]);
 
-  const navigate = useNavigate();
-
   const openModal = (room) => {
     setSelectedRoom(room);
     setIsModalOpen(true);
-    setCheckInDate("");
-    setCheckOutDate("");
+    setCheckInDate(today.toISOString().split('T')[0]);
+    setCheckOutDate(tomorrow.toISOString().split('T')[0]);
     setNumGuests(1);
     setNumRooms(1);
     setNumChildren(0);
@@ -76,8 +71,6 @@ const Allrooms = () => {
 
       const totalCost = diffDays * selectedRoom.price * numRooms;
       setTotalPrice(totalCost);
-      console.log(totalCost);
-      
     } else {
       setTotalPrice(0); 
     }
@@ -88,10 +81,21 @@ const Allrooms = () => {
   }, [checkInDate, checkOutDate, numRooms, selectedRoom]);
 
   const handleReserveNow = () => {
-    if (!checkInDate || !checkOutDate) {
-      alert("Please select check-in and check-out dates.");
-      return;
-    }
+    const bookingDetails = {
+      firstName: "User's First Name", 
+      lastName: "User's Last Name", 
+      roomDetails: {
+        name: selectedRoom.name,
+        description: selectedRoom.description,
+        type: selectedRoom.type,
+      },
+      checkInDate,
+      checkOutDate,
+      numberOfGuests: numGuests,
+      totalAmount: totalPrice.toFixed(2),
+    };
+
+    localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails));
 
     navigate("/checkout", {
       state: {
@@ -103,13 +107,6 @@ const Allrooms = () => {
         numChildren,
       },
     });
-
-    console.log("Selected room:", selectedRoom);
-    console.log("Check-in Date:", checkInDate);
-    console.log("Check-out Date:", checkOutDate);
-    console.log("Number of Guests:", numGuests);
-    console.log("Number of Rooms:", numRooms);
-    console.log("Number of Children:", numChildren);
   };
 
   if (loading) return <p>Loading rooms...</p>;
@@ -208,6 +205,7 @@ const Allrooms = () => {
                       type="date"
                       value={checkInDate}
                       onChange={(e) => setCheckInDate(e.target.value)}
+                      min={today.toISOString().split('T')[0]}
                       required
                     />
                     <label>Check-out Date:</label>
@@ -215,6 +213,7 @@ const Allrooms = () => {
                       type="date"
                       value={checkOutDate}
                       onChange={(e) => setCheckOutDate(e.target.value)}
+                      min={tomorrow.toISOString().split('T')[0]} 
                       required
                     />
                   </div>

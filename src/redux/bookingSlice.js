@@ -13,7 +13,7 @@ const initialState={
     totalRooms: 0, 
     totalUsers: 0, 
     bookedUsers: 0,
-    totalPrice: 0,
+    totalPrice: 0, 
 }
 
 export const BookingSlice=createSlice({
@@ -36,14 +36,10 @@ export const BookingSlice=createSlice({
         setUsers(state,action){
             state.list=action.payload;
             state.loading=false;
-        } ,
+        },
         setRoomData(state, action) {
             state.roomData = action.payload;
             state.loading = false;
-        },
-        setRooms(state,action){
-            state.room=action.payload;
-            state.loading=false;
         },
         setSummary(state, action) {
             const { totalRooms, totalUsers, bookedUsers, totalPrice } = action.payload;
@@ -56,7 +52,7 @@ export const BookingSlice=createSlice({
     }
 })
 
-export const { setLoading, setData, setError, setUsers, setRoomData, setRooms, setSummary } = BookingSlice.actions
+export const { setLoading, setData, setError, setUsers, setRoomData, setSummary } = BookingSlice.actions
 
 export default BookingSlice.reducer
 
@@ -117,7 +113,7 @@ export const fetchDataFirestore=async(dispatch)=>{
                 id: doc.id,
                 ...doc.data(),
             }));
-            dispatch(setRoomData(data));
+            dispatch(setData(data));
           console.log("Document data is:", docSnap.docs);
         } else {
           console.log("No such document!");
@@ -146,7 +142,7 @@ export const fetchDataFirestore=async(dispatch)=>{
     catch(error){
         dispatch(setError(error.message));
     }
-  }
+  };
 
   export const fetchRooms=async(dispatch)=>{
     dispatch(setLoading())
@@ -185,4 +181,4 @@ export const fetchDataFirestore=async(dispatch)=>{
     } catch (error) {
         dispatch(setError(error.message));
     }
-};
+  }

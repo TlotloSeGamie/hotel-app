@@ -27,14 +27,14 @@ const Reservation = () => {
                     <li><strong>Check-in Date:</strong> {bookingDetails.checkInDate}</li>
                     <li><strong>Check-out Date:</strong> {bookingDetails.checkOutDate}</li>
                     <li><strong>Room Type:</strong> {bookingDetails.roomDetails.type}</li>
+                    <li><strong>Room Description:</strong> {bookingDetails.roomDetails.description}</li> {/* Show room description */}
                     <li><strong>Number of Guests:</strong> {bookingDetails.numberOfGuests}</li>
                     <li><strong>Total Amount:</strong> {bookingDetails.totalAmount} ZAR</li>
                   </ul>
                 </div>
-          
-          ) : (
-            <p>No booking details available.</p>
-          )}
+              ) : (
+                <p>No booking details available.</p>
+              )}
           </div>
           <div className='paypal'>
               <PayPalMethod />

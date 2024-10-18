@@ -1,22 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Rooms.css";
 import { FaBath, FaBed } from "react-icons/fa";
-import executive from "../images/executive suite/I-Resort-Crete-Gold-Double-Room-Sea-View-1.jpg";
-import additionalImage1 from "../images/executive suite/I-Resort-Crete-Gold-Double-Room-Sea-View-1.jpg";
-import additionalImage2 from "../images/executive suite/I-Resort-Crete-Gold-Double-Room-Sea-View-2.jpg";
-import additionalImage3 from "../images/executive suite/I-Resort-Crete-Gold-Junior-Suite-Sea-View-2-600x454.jpg";
-import additionalImage4 from "../images/executive suite/I-Resort-Crete-Gold-Suite-Sea-View-Private-Pool-2.jpg";
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
-import { GiGuardedTower } from 'react-icons/gi';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 const Suites = ({ showDropdown }) => {
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [roomData, setRoomData] = useState([]);
+  const navigate = useNavigate();
 
-  const roomData = [
-    // Room data goes here...
-  ];
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const docSnap = await getDocs(collection(db, "allRooms"));
+        if (docSnap.docs.length > 0) {
+          const data = docSnap.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setRoomData(data);
+        } else {
+          console.log("No Rooms!");
+        }
+      } catch (error) {
+        console.error("Error fetching rooms:", error.message);
+      }
+    };
+
+    fetchRooms();
+  }, []);
 
   const openModal = (room) => {
     setSelectedRoom(room);
@@ -28,10 +43,16 @@ const Suites = ({ showDropdown }) => {
     setSelectedRoom(null);
   };
 
-  const navigate = useNavigate();
-
-  const handleBookNow = () => {
-    navigate('/checkout');
+  const handleBookNow = (room) => {
+    navigate('/checkout', {
+      state: {
+        room,
+        checkInDate: null,
+        checkOutDate: null,
+        numGuests: 1,  
+        numChildren: 0 
+      }
+    });
   };
 
   if (showDropdown) {
@@ -42,9 +63,9 @@ const Suites = ({ showDropdown }) => {
     <div className="main">
       <Navbar />
       <div className="lines">
-        <hr className="line"></hr>
+        <hr className="line" />
         <h2>Top Apartments</h2>
-        <hr className="line"></hr>
+        <hr className="line" />
       </div>
       <div className="rooms-container">
         {roomData.map((room, index) => (
@@ -61,7 +82,7 @@ const Suites = ({ showDropdown }) => {
                 <h5><FaBath className="icon-style" /> {room.bathroom}</h5>
                 <h5><FaBed className="icon-style" /> {room.bedroom}</h5>
               </div>
-              <button className="btn" onClick={handleBookNow}>Book now</button>
+              <button className="btn" onClick={() => handleBookNow(room)}>Book now</button>
             </div>
           </div>
         ))}
@@ -96,11 +117,12 @@ const Suites = ({ showDropdown }) => {
                 <p><strong>View:</strong> {selectedRoom.view}</p>
                 <p><strong>Accessibility:</strong> {selectedRoom.accessibility}</p>
                 <ul>
+                  <p><strong>Highlights:</strong></p>
                   {selectedRoom.highlights.map((highlight, index) => (
                     <li key={index}>{highlight}</li>
                   ))}
                 </ul>
-                <button className="btn" onClick={handleBookNow}>Book Now</button>
+                <button className="btn" onClick={() => handleBookNow(selectedRoom)}>Book Now</button>
               </div>
             </div>
           </div>
@@ -111,4 +133,3 @@ const Suites = ({ showDropdown }) => {
 };
 
 export default Suites;
-

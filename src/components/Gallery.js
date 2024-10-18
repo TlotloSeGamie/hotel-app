@@ -24,87 +24,116 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const Gallery = () => {
+    const images = [
+        gallery1,
+        gallery2,
+        gallery3,
+        gallery4,
+        gallery5,
+        gallery6,
+        gallery7,
+        gallery8,
+        gallery9,
+        gallery10,
+        gallery11,
+        gallery12,
+        gallery13,
+        gallery14,
+        gallery15,
+        gallery16,
+        gallery17,
+        gallery18,
+        gallery19,
+        gallery20,
+        gallery21,
+        gallery1,
+        gallery2,
+        gallery3,
+        gallery4,
+        gallery5,
+        gallery6,
+        gallery7,
+        gallery8,
+        gallery9,
+        gallery10,
+        gallery11,
+        gallery12,
+        gallery13,
+        gallery14,
+        gallery15,
+        gallery16,
+        gallery17,
+        gallery18,
+        gallery19,
+        gallery20,
+        gallery21,
+        gallery1,
+        gallery2,
+        gallery3,
+        gallery4,
+        gallery5,
+        gallery6,
+        gallery7,
+        gallery8,
+        gallery9,
+        gallery10,
+        gallery11,
+        gallery12,
+        gallery13,
+        gallery14,
+        gallery15,
+        gallery16,
+        gallery17,
+        gallery18,
+        gallery19,
+        gallery20,
+        gallery21,
+        gallery1,
+        gallery2,
+        gallery3,
+        gallery4,
+        gallery5,
+        gallery6,
+        gallery7,
+        gallery8,
+        gallery9,
+        gallery10,
+        gallery11,
+        gallery12,
+        gallery13,
+        gallery14,
+        gallery15,
+        gallery16,
+        gallery17,
+        gallery18,
+        gallery19,
+        gallery20,
+        gallery21,
+    ];
+
     return (
         <div className="main-container">
-        <Navbar />
-            <div className="text">
-                <div className="text-line">
-                    <hr className="line"></hr>
-                    <h1>GALLERY</h1>
-                    <hr className="line"></hr>
+                <Navbar />
+            <div className="clean">
+                <div className="texts">
+                    <div className="text-line">
+                        <hr className="line" />
+                        <h1>GALLERY</h1>
+                        <hr className="line" />
+                    </div>
+                    <h3>Explore the Beauty of Da Gamie A Visual Journey Awaits!</h3>
                 </div>
-                <h3>Explore the Beauty of Da Gamie A Visual Journey Awaits!</h3>
-            </div>
-            <div className="gallery">
-                <div className="photos">
-                    <img src={gallery1} />
+                <div className="gallery">
+                    {images.map((image, index) => (
+                        <div className="photos" key={index}>
+                            <img src={image} alt={`Gallery Image ${index + 1}`} />
+                        </div>
+                    ))}
                 </div>
-                <div className="photos">
-                    <img src={gallery2} />
-                </div>
-                <div className="photos">
-                    <img src={gallery3} />
-                </div>
-                <div className="photos">
-                    <img src={gallery4} />
-                </div>
-                <div className="photos">
-                    <img src={gallery5} />
-                </div>
-                <div className="photos">
-                    <img src={gallery6} />
-                </div>
-                <div className="photos">
-                    <img src={gallery7} />
-                </div>
-                <div className="photos">
-                    <img src={gallery8} />
-                </div>
-                <div className="photos">
-                    <img src={gallery9} />
-                </div>
-                <div className="photos">
-                    <img src={gallery10} />
-                </div>
-                <div className="photos">
-                    <img src={gallery11} />
-                </div>
-                <div className="photos">
-                    <img src={gallery12} />
-                </div>
-                <div className="photos">
-                    <img src={gallery13} />
-                </div>
-                <div className="photos">
-                    <img src={gallery14} />
-                </div>
-                <div className="photos">
-                    <img src={gallery15} />
-                </div>
-                <div className="photos">
-                    <img src={gallery16} />
-                </div>
-                <div className="photos">
-                    <img src={gallery17} />
-                </div>
-                <div className="photos">
-                    <img src={gallery18} />
-                </div>
-                <div className="photos">
-                    <img src={gallery19} />
-                </div>
-                <div className="photos">
-                    <img src={gallery20} />
-                </div>
-                <div className="photos">
-                    <img src={gallery21} />
-                </div>
-            </div>
-            <div className="gallery-content">
-                <Footer />
+            <Footer />
             </div>
         </div>
-    )
+    );
 };
 
 export default Gallery;

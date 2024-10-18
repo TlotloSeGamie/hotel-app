@@ -2,17 +2,25 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { performLogout } from '../redux/authSlice'; 
+import { setUser } from '../redux/authSlice'; 
 import "./Navbar.css";
 import logo from '../images/Screenshot-logo.jpg';
-import { FaUserCircle } from 'react-icons/fa'; 
+import { FaHeart, FaUserCircle } from 'react-icons/fa'; 
+import { FaCalendarCheck } from 'react-icons/fa'
 
 const Navbar = () => {
   const [shrink, setShrink] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showProfile, setShowProfile] = useState(false); 
+  const [showProfileModal, setShowProfileModal] = useState(false); 
   const user = useSelector((state) => state.auth.user); 
   const dispatch = useDispatch();
-  const profileRef = useRef();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user'); 
+    if (storedUser) {
+      dispatch(setUser(JSON.parse(storedUser))); 
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,34 +31,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (profileRef.current && !profileRef.current.contains(event.target)) {
-        setShowProfile(false);
-      }
-    };
-
-    if (showProfile) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [showProfile]);
-
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
 
-  const toggleProfile = () => {
-    setShowProfile(!showProfile);
+  const toggleProfileModal = () => {
+    setShowProfileModal(!showProfileModal);
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('user'); 
     dispatch(performLogout());
+    setShowProfileModal(false); 
   };
 
   return (
@@ -86,19 +78,45 @@ const Navbar = () => {
         <ul className="logins">
           {user ? (
             <>
-              <li className="user-icon" onClick={toggleProfile}>
-                <FaUserCircle size={30} color="blue" />
+              <li className="user-icon" onClick={toggleProfileModal}>
+                <FaUserCircle size={30} color="#0282c3"/>{user.userName}
               </li>
-              {showProfile && (
-                <div className="profile-popup" ref={profileRef}>
-                  <ul>
-                    <li><strong>Username:</strong> {user.userName}</li>
-                    <li><strong>Email:</strong> {user.email}</li>
-                    <li><strong>Phone:</strong> {user.phone}</li>
-                    <li>
+              {showProfileModal && (
+                <div className="profile-overlay">
+                  <div className='profile-mid'>
+                    <div className="profile-content">
+                      <h2>User Profile</h2>
+                      <div className=''>
+                      {/* <div>
+                        <label htmlFor="image">Upload Image:</label>
+                        <input
+                          name="image"
+                          type="file"
+                          accept="image/*"
+                          // onChange={handleFileChange}
+                        />
+                      </div> */}
+                      <div className='edit-profile'>
+                        <FaUserCircle size={210} color="#0282c3" className='circle'/>
+                        <button className='edit-button'> edit</button>
+                      </div>
+                      {/* {user.userName} */}
+                        <ul>
+                          <li><strong>Username:</strong> {user.userName}</li>
+                          <li><strong>Email:</strong> {user.email}</li>
+                          <li><strong>Phone:</strong> {user.phone}</li>
+                        </ul>
+                      </div>
+                      <div className='users-thingies'>
+                        <ul>
+                          <li><a href='#' className='booking-list'>Your Bookings <FaCalendarCheck size={30} color="#0282c3" /></a></li>
+                          <li><a href='#' className='booking-list'>Favourites <FaHeart size={30} color="#ff0000" /></a></li>
+                        </ul>
+                      </div>
                       <button onClick={handleLogout} className="logout-btn">LOGOUT</button>
-                    </li>
-                  </ul>
+                      <button onClick={toggleProfileModal} className="close-btn">CLOSE</button>
+                    </div>
+                  </div>
                 </div>
               )}
             </>

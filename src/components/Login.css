@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 0;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); */
     height: 100%;
     width: 40%;
 }
@@ -48,6 +48,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1.5rem;
 }
 
 .gone {

@@ -13,7 +13,6 @@ const Login = () => {
   const { user, loading, error } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   const handleSignIn = () => {
@@ -49,11 +48,16 @@ const Login = () => {
             name="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <h5>Forgot your password?</h5>
+          <span 
+            style={{ cursor: "pointer", color: "blue" }}
+            onClick={() => navigate("/forgot-password")}
+          >
+            Forgot Password
+          </span>
           <button className="login-btn" onClick={handleSignIn}>
             LOGIN
           </button>
-          <h3>
+          <h5>
             Don't have an account?{" "}
             <span
               style={{ cursor: "pointer", color: "blue" }}
@@ -61,7 +65,7 @@ const Login = () => {
             >
               Sign Up
             </span>
-          </h3>
+          </h5>
 
           {loading && (
             <Spinner animation="border" role="status">
@@ -69,14 +73,9 @@ const Login = () => {
             </Spinner>
           )}
           {error && <p>Error: {error}</p>}
-
-          <div className="or">
-            <div className="line-1"></div>
-            <h2>OR</h2>
-            <div className="line2"></div>
-          </div>
-          <h3>Login with GOOGLE</h3>
         </div>
+
+        
       </div>
       <div className="login-img">
         <div className="sign">
