@@ -1,5 +1,3 @@
-// src/redux/authSlice.js
-
 import { createSlice } from '@reduxjs/toolkit';
 import { createUserWithEmailAndPassword,
   signInWithEmailAndPassword, signOut,sendPasswordResetEmail,} from "firebase/auth";

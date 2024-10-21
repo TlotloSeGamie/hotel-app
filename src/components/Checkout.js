@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import BookingForm from "./BookingForm";
 import { useState, useEffect } from "react";
+// import 
 
 const Checkout = () => {
   const location = useLocation();

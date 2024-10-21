@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Checkout.css';
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import { AddToFireStrore } from '../redux/bookingSlice';
+import { AddToFireStrore , addBookingToFirestore } from '../redux/bookingSlice';
 import { useDispatch } from 'react-redux';
 
 const Checkout = () => {
@@ -41,6 +41,8 @@ const Checkout = () => {
             const name = details.payer.name.given_name;
             alert(`Transaction completed by ${name}`);
             AddToFireStrore(roomDetails, bookingDetails, extraDetails, dispatches)
+            dispatches(addBookingToFirestore(bookingDetails))
+            
         });
     }
 

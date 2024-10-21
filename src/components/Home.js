@@ -4,6 +4,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 import Rooms from "./Suites";
 import Offer from "./Offer";
 import Footer from "./Footer";
+import Suites from "./Suites";
 
 const Home = () => {
     const [checkInDate, setCheckInDate] = useState("");
@@ -63,7 +64,7 @@ const Home = () => {
 
                 <div className="home-content">
                     <Offer />
-                    <Rooms />
+                    <Suites />
                     <Footer />
                 </div>
             </div>

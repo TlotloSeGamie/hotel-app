@@ -104,13 +104,31 @@ body {
 .user-icon {
   display: flex;
   align-items: center;
+  gap: 0.2rem;
+  /* font-size: 1.6rem; */
+  font-weight: bolder;
+  color: black;
 }
+
+.user-name {
+  text-transform: capitalize; 
+  color: #000000c5;
+  font-size: 1.6rem;
+  font-weight: bolder;
+}
+
+/* .user-name span {
+  color: #000;
+  font-size: 1.6rem;
+  font-weight: bolder;
+} */
 
 .user-icon span {
   margin-left: 0.625rem; /* Equivalent to 10px */
-  font-size: 1rem; /* Equivalent to 16px */
-  color: #0282c3;
+  /* font-size: 1rem; Equivalent to 16px */
+  /* color: #0282c3; */
 }
+
 
 .logout-btn {
   background-color: transparent;

@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getDocs, collection, doc,addDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import { db } from "../config/firebase";
 import { Children } from "react";
+import { auth } from "../config/firebase";
 
 
 const initialState={
@@ -169,7 +171,7 @@ export const fetchDataFirestore=async(dispatch)=>{
     try {
         const bookingsSnapshot = await getDocs(collection(db, "Bookings"));
         const usersSnapshot = await getDocs(collection(db, "users"));
-        const roomsSnapshot = await getDocs(collection(db, "rooms")); // Assuming "rooms" is your collection for rooms
+        const roomsSnapshot = await getDocs(collection(db, "rooms")); 
 
         const bookings = bookingsSnapshot.docs.map((doc) => doc.data());
         const totalRooms = roomsSnapshot.docs.length;
@@ -182,3 +184,47 @@ export const fetchDataFirestore=async(dispatch)=>{
         dispatch(setError(error.message));
     }
   }
+
+  export const addBookingToFirestore = ( bookingDetails) => async (dispatch) => {
+
+    const uid = auth.currentUser.uid;
+    console.log(uid)
+    
+    dispatch(setLoading());
+    try {
+
+        const bookingRef = await addDoc(collection(db, "users", uid, "Bookings"), {
+          
+            ...bookingDetails
+        });
+        dispatch(setData({  uid, docId: bookingRef.id }));
+    } catch (error) {
+        console.error("Error adding booking:", error);
+    } finally {
+        dispatch(setLoading(false));
+    }
+};
+
+// export const fetchBookingToFirestore = async (userEmail, uid, dispatch) => {
+//     dispatch(setLoading());
+//     try {
+//         const bookingsRef = collection(db, "Bookings");
+//         const querySnapshot = await getDocs(bookingsRef);
+        
+//         const userBookings = querySnapshot.docs
+//             .map((doc) => ({
+//                 id: doc.id,
+//                 ...doc.data(),
+//             }))
+//             .filter((booking) => booking.Email === userEmail && booking.uid === uid); 
+
+//         if (userBookings.length > 0) {
+//             dispatch(setData(userBookings));
+//             console.log("User bookings:", userBookings);
+//         } else {
+//             console.log("No bookings found for this user.");
+//         }
+//     } catch (error) {
+//         dispatch(setError(error.message));
+//     }
+// };
