@@ -267,3 +267,21 @@ body {
 .close-btn {
   background-color: #888;
 }
+
+.booking-list {
+  display: flex;
+ justify-content: center; 
+ align-items: center;
+ gap: 0.5rem;
+}
+
+.favor-list {
+  display: flex;
+ justify-content: center; 
+ align-items: center;
+ gap: 0.5rem;
+}
+
+.favor-list:hover {
+  color: #ff0000;
+}

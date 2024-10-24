@@ -296,24 +296,95 @@ input[type="number"] {
     background-color: #026499;
 }
 
-.room-icons {
+.ama-icons {
+    position: absolute;
+    background-color: #fff4f4a4;
+    padding: 0.7rem;
     display: flex;
     justify-content: flex-end; 
     gap: 1rem; 
     margin-top: 1rem; 
+    border-radius: 2rem;
 }
 
-.icon {
-    font-size: 1.5rem;
+.share-icon {
+    font-size: 2.2rem;
     cursor: pointer;
-    color: grey;
+    color: #002fffc7;
     transition: color 0.3s ease;
 }
 
-.icon:hover {
-    color: #0282c3; 
+.share-icon:hover {
+    color: #ff0000;
 }
 
 .heart-icon {
-    color: #e63946; 
+    font-size: 2.2rem;
+    cursor: pointer;
+    color: #002fffc7; 
+    transition: color 0.3s ease;
 }
+
+.heart-icon:hover {
+    color: #ff0000;
+}
+
+.user-bookings {
+    margin: 20px 0;
+  }
+  
+  .user-bookings h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .booking-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  .booking-table th, 
+  .booking-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .booking-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .booking-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .booking-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .booking-table td {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .booking-table th,
+  .booking-table td {
+    text-align: left;
+    padding: 10px;
+  }
+  
+  .booking-table tbody td:last-child {
+    font-weight: bold;
+  }
+  
+  p {
+    color: #777;
+    font-size: 1rem;
+    text-align: center;
+  }
+  

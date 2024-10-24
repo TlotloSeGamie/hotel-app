@@ -4,6 +4,7 @@ import { getAuth } from "firebase/auth";
 import { db } from "../config/firebase";
 import { Children } from "react";
 import { auth } from "../config/firebase";
+import { setUser } from "./authSlice";
 
 
 const initialState={
@@ -16,6 +17,9 @@ const initialState={
     totalUsers: 0, 
     bookedUsers: 0,
     totalPrice: 0, 
+    userBookings : [],
+    likedRooms: []
+
 }
 
 export const BookingSlice=createSlice({
@@ -49,12 +53,21 @@ export const BookingSlice=createSlice({
             state.totalUsers = totalUsers;
             state.bookedUsers = bookedUsers;
             state.totalPrice = totalPrice;
-        }
+        },
+         setUserBookings (state, action){
+            state.userBookings = action.payload
+         } ,
+
+         setUserLikedRooms (state, action){
+            state.likedRooms = action.payload
+         }
+         
+         
         
     }
 })
 
-export const { setLoading, setData, setError, setUsers, setRoomData, setSummary } = BookingSlice.actions
+export const { setLoading, setData, setError, setUsers, setRoomData, setSummary, setUserBookings, setUserLikedRooms} = BookingSlice.actions
 
 export default BookingSlice.reducer
 
@@ -205,26 +218,76 @@ export const fetchDataFirestore=async(dispatch)=>{
     }
 };
 
-// export const fetchBookingToFirestore = async (userEmail, uid, dispatch) => {
-//     dispatch(setLoading());
-//     try {
-//         const bookingsRef = collection(db, "Bookings");
-//         const querySnapshot = await getDocs(bookingsRef);
+export const fetchBookingToFirestore =  () => async (dispatch) => {
+    const uid = auth.currentUser.uid;
+    
+    dispatch(setLoading());
+   
+    try {
+        const bookingsRef = collection(db,  "users", uid, "Bookings");
+        const querySnapshot = await getDocs(bookingsRef);
+        console.log(querySnapshot)
         
-//         const userBookings = querySnapshot.docs
-//             .map((doc) => ({
-//                 id: doc.id,
-//                 ...doc.data(),
-//             }))
-//             .filter((booking) => booking.Email === userEmail && booking.uid === uid); 
+        const userBookings = querySnapshot.docs
+            .map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }))
+       console.log(userBookings);
+       
 
-//         if (userBookings.length > 0) {
-//             dispatch(setData(userBookings));
-//             console.log("User bookings:", userBookings);
-//         } else {
-//             console.log("No bookings found for this user.");
-//         }
-//     } catch (error) {
-//         dispatch(setError(error.message));
-//     }
-// };
+        
+            dispatch(setUserBookings(userBookings));
+            
+        
+    } catch (error) {
+        dispatch(setError(error.message));
+    }
+};
+
+export const addLikedRooms = ( bookingDetails) => async (dispatch) => {
+    const uid = auth.currentUser.uid;
+    console.log(uid)
+    
+    dispatch(setLoading());
+    try {
+
+        const bookingRef = await addDoc(collection(db, "users", uid, "LikedRooms"), {
+          
+            ...bookingDetails
+        });
+        console.log(bookingDetails);
+        
+        dispatch(setData({  uid, docId: bookingRef.id }));
+    } catch (error) {
+        console.error("Error Liking room:", error);
+    } finally {
+        dispatch(setLoading(false));
+    }
+};
+
+export const fetchLikedRooms =  () => async (dispatch) => {
+    const uid = auth.currentUser.uid;
+    
+    dispatch(setLoading());
+   
+    try {
+        const bookingsRef = collection(db,  "users", uid, "LikedRooms");
+        const querySnapshot = await getDocs(bookingsRef);
+        console.log(querySnapshot)
+        
+        const userBookings = querySnapshot.docs
+            .map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }))
+       
+            dispatch(setUserLikedRooms(userBookings));
+            
+    } catch (error) {
+        dispatch(setError(error.message));
+    }
+};
+
+
+    

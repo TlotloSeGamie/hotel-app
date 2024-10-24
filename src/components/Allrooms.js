@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Rooms.css";
-import { FaBath, FaBed, FaUserAlt } from "react-icons/fa";
+import { FaBath, FaBed, FaUserAlt, FaHeart, FaShareAlt } from "react-icons/fa";
 import goldexecutive from "../images/rooms/960x0.webp";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { FaHeart, FaShareAlt } from 'react-icons/fa';
 import { fetchData } from "../redux/dbSlice";
+import { addLikedRooms } from "../redux/bookingSlice";
 
 const Allrooms = () => {
-  // Define today's and tomorrow's date
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
@@ -24,11 +23,13 @@ const Allrooms = () => {
   const [numChildren, setNumChildren] = useState(0);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [likedRooms, setLikedRooms] = useState({}); // Track liked rooms by ID
+  const [isShareOpen, setIsShareOpen] = useState(false);
 
   const { data, loading, error } = useSelector((state) => state.data);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
@@ -62,17 +63,57 @@ const Allrooms = () => {
     setTotalPrice(0);
   };
 
+  const toggleLike = (roomDetails) => {
+    const isLiked = likedRooms[roomDetails.id];
+    if (isLiked) {
+      const newLikedRooms = { ...likedRooms };
+      delete newLikedRooms[roomDetails.id];
+      setLikedRooms(newLikedRooms);
+    } else {
+      setLikedRooms({ ...likedRooms, [roomDetails.id]: true });
+      handleLikeRoom(roomDetails);
+    }
+  };
+
+  const handleShare = async (room) => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Check out this room: ${room.name}`,
+          text: `Room details: Flooring - ${room.flooring}, View - ${room.view}, Accessibility - ${room.accessibility}`,
+          url: window.location.href,
+        });
+        console.log("Content shared successfully");
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
+    } else {
+      console.error("Web Share API not supported in this browser");
+    }
+  };
+
+  const handleLikeRoom = (roomDetails) => {
+    const bookingDetails = {
+      roomId: roomDetails.id,
+      roomName: roomDetails.name,
+    };
+    console.log("liked",roomDetails);
+    
+    dispatch(addLikedRooms(bookingDetails));
+  };
+
+
   const calculatePrice = () => {
     if (checkInDate && checkOutDate && selectedRoom) {
       const checkIn = new Date(checkInDate);
       const checkOut = new Date(checkOutDate);
       const diffTime = Math.abs(checkOut - checkIn);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
       const totalCost = diffDays * selectedRoom.price * numRooms;
       setTotalPrice(totalCost);
     } else {
-      setTotalPrice(0); 
+      setTotalPrice(0);
     }
   };
 
@@ -82,8 +123,8 @@ const Allrooms = () => {
 
   const handleReserveNow = () => {
     const bookingDetails = {
-      firstName: "User's First Name", 
-      lastName: "User's Last Name", 
+      firstName: "User's First Name",
+      lastName: "User's Last Name",
       roomDetails: {
         name: selectedRoom.name,
         description: selectedRoom.description,
@@ -129,6 +170,22 @@ const Allrooms = () => {
             onClick={() => openModal(room)}
           >
             <div className="image-container">
+              <div className="ama-icons">
+                <FaHeart
+                  className={`heart-icon ${likedRooms[room.id] ? "liked" : ""}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleLike(room);
+                  }}
+                />
+                <FaShareAlt
+                  className="share-icon"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleShare(room);
+                  }}
+                />
+              </div>
               <img src={room.image || goldexecutive} alt={room.name} />
             </div>
             <div className="room-content">
@@ -193,10 +250,6 @@ const Allrooms = () => {
                   <p>
                     <strong>Accessibility:</strong> {selectedRoom.accessibility}
                   </p>
-                  <ul>
-                    <FaHeart className="icon heart-icon" />
-                    <FaShareAlt className="icon share-icon" />
-                  </ul>
                 </div>
                 <div className="bookings">
                   <div className="booking-dates">
