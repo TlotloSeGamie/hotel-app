@@ -30,9 +30,9 @@ function App() {
     
     <Router>
       <Routes>
-        {/*  <Route path="/" element={<Home />} />
-        <Route path='/' element={<Main />} />
-       <Route path='/admin' element={<AdminDashboard />} />
+         <Route path="/" element={<Home />} />
+       {/*  <Route path='/' element={<Main />} />
+        */}<Route path='/admin' element={<AdminDashboard />} />
         <Route path="/rooms" element={<Suites />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/reservation" element={<Reservation />} />
@@ -42,7 +42,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/all-rooms" element={<Allrooms />} /> 
-        <Route path="/forgot-password" element={<ForgotPassword />} /> */}
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path='reviews' element={<Reviews />} />
       </Routes>
     </Router>

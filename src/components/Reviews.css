@@ -1,4 +1,7 @@
-/* reviews.css */
+.reviews-container {
+    width: 100%;
+    height: auto;
+}
 .reviews-header {
     text-align: center;
     margin-bottom: 20px;
@@ -54,5 +57,133 @@
   .review-card span {
     font-size: 1.2rem;
     color: #ccc;
+  }
+  
+  /* reviews.css */
+.reviews-section {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+    padding: 40px;
+  }
+  
+  .reviews-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reviews-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .review-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review-card h4 {
+    font-size: 1.5rem;
+    color: #007BFF;
+    margin-bottom: 10px;
+  }
+  
+  .review-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .review-card span.filled {
+    color: #FFD700;
+  }
+  
+  .review-card span {
+    font-size: 1.2rem;
+    color: #ccc;
+  }
+  
+  /* Form Section */
+  .form-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-container input,
+  .form-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .form-container textarea {
+    resize: none;
+    height: 100px;
+  }
+  
+  .form-container .rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .form-container .rating span {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ccc;
+  }
+  
+  .form-container .rating span.filled {
+    color: #FFD700;
+  }
+  
+  .form-container button {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-container button:hover {
+    background-color: #0056b3;
   }
   
