@@ -1,20 +1,46 @@
 .reserve-container {
     width: 100%;
+    padding: 2rem; 
 }
 
 .reserve {
     width: 100%;
     height: auto;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column; 
     align-items: center;
 }
 
-.paypal {
-    width: 50%;
+.book, .paypal {
+    width: 100%; 
+    max-width: 600px; 
+    margin: 1rem 0; 
+    padding: 1rem; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
+    background-color: #fff;
 }
 
-.book {
-    width: 50%;
-    height: auto;
+.success-message {
+    text-align: center; 
+}
+
+ul {
+    list-style-type: none;
+    padding: 0; 
+}
+
+li {
+    margin: 0.5rem 0; 
+}
+
+@media (min-width: 768px) {
+    .reserve {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .book, .paypal {
+        width: 45%; 
+    }
 }

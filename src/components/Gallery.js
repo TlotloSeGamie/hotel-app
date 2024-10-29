@@ -123,12 +123,14 @@ const Gallery = () => {
                     </div>
                     <h3>Explore the Beauty of Da Gamie A Visual Journey Awaits!</h3>
                 </div>
-                <div className="gallery">
-                    {images.map((image, index) => (
-                        <div className="photos" key={index}>
-                            <img src={image} alt={`Gallery Image ${index + 1}`} />
-                        </div>
-                    ))}
+                <div className="pics">
+                    <div className="gallery">
+                        {images.map((image, index) => (
+                            <div className="photos" key={index}>
+                                <img src={image} alt={`Gallery Image ${index + 1}`} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             <Footer />
             </div>

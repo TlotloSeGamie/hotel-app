@@ -1,6 +1,6 @@
-.main-container {
+/* .main-container {
     width: 100%;
-    /* max-width: 500px; */
+    max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -45,3 +45,23 @@ input {
     color: #28a745;
     font-weight: bold;
 }
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 15px; 
+    }
+
+    .submit-button {
+        padding: 10px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 10px; 
+    }
+
+    input {
+        padding: 8px; 
+    }
+} */

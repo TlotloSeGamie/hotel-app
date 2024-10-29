@@ -10,22 +10,23 @@
 
 .nav-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between; /* Adjusted for better spacing */
   align-items: center;
+  padding: 1rem; /* Added padding for better touch targets */
 }
 
 .nav-container img {
-  width: 10rem; /* Equivalent to 160px */
+  width: 10rem;
   height: auto;
   transition: all 0.3s ease;
 }
 
 .shrink .nav-container {
-  padding: 0.5rem 0; /* Equivalent to 8px */
+  padding: 0.5rem; 
 }
 
 .shrink img {
-  width: 7rem; /* Equivalent to 112px */
+  width: 7rem; 
 }
 
 a {
@@ -37,7 +38,8 @@ a {
 ul {
   display: flex;
   list-style: none;
-  gap: 2rem; /* Equivalent to 32px */
+  gap: 2rem; 
+  flex-wrap: wrap; /* Allow items to wrap */
 }
 
 a:hover {
@@ -45,7 +47,7 @@ a:hover {
 }
 
 .logins {
-  margin-right: 1rem; /* Equivalent to 16px */
+  margin-right: 1rem;
 }
 
 .rooms-dropdown {
@@ -57,11 +59,11 @@ a:hover {
   top: 100%;
   left: 0;
   background-color: #fff;
-  border: 0.0625rem solid #ccc; /* Equivalent to 1px */
-  border-radius: 0.3125rem; /* Equivalent to 5px */
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Equivalent to 4px and 8px */
+  border: 0.0625rem solid #ccc; 
+  border-radius: 0.3125rem; 
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); 
   z-index: 1000;
-  min-width: 9.375rem; /* Equivalent to 150px */
+  min-width: 9.375rem; 
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -74,7 +76,7 @@ a:hover {
 }
 
 .dropdown-menu ul li {
-  padding: 0.625rem; /* Equivalent to 10px */
+  padding: 0.625rem; 
 }
 
 .dropdown-menu ul li a {
@@ -88,16 +90,16 @@ a:hover {
 }
 
 body {
-  padding-top: 5rem; /* Equivalent to 80px */
+  padding-top: 5rem; 
 }
 
 .checkout-container {
-  margin-top: 2rem; /* Equivalent to 32px */
+  margin-top: 2rem; 
 }
 
 .user-avatar {
-  width: 1.875rem; /* Equivalent to 30px */
-  height: 1.875rem; /* Equivalent to 30px */
+  width: 1.875rem;
+  height: 1.875rem; 
   border-radius: 50%;
 }
 
@@ -105,7 +107,6 @@ body {
   display: flex;
   align-items: center;
   gap: 0.2rem;
-  /* font-size: 1.6rem; */
   font-weight: bolder;
   color: black;
 }
@@ -117,25 +118,16 @@ body {
   font-weight: bolder;
 }
 
-/* .user-name span {
-  color: #000;
-  font-size: 1.6rem;
-  font-weight: bolder;
-} */
-
 .user-icon span {
-  margin-left: 0.625rem; /* Equivalent to 10px */
-  /* font-size: 1rem; Equivalent to 16px */
-  /* color: #0282c3; */
+  margin-left: 0.625rem;
 }
-
 
 .logout-btn {
   background-color: transparent;
   border: none;
   color: #0282c3;
   cursor: pointer;
-  font-size: 1rem; /* Equivalent to 16px */
+  font-size: 1rem;
 }
 
 .profile-overlay {
@@ -167,39 +159,28 @@ body {
 
 .profile-content {
   position: relative;
-  left: 4rem; /* Equivalent to 64px */
+  left: 4rem; 
   background: #fff;
-  border-radius: 0.5rem; /* Equivalent to 8px */
-  padding: 2rem; /* Equivalent to 32px */
+  border-radius: 0.5rem; 
+  padding: 2rem; 
   width: 40%;
-  max-width: 56.25rem; /* Equivalent to 900px */
+  max-width: 56.25rem; 
   height: 90%;
-  position: relative;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* Equivalent to 16px */
+  gap: 1rem;
 }
 
 .profile-content h2 {
-  margin-bottom: 1rem; /* Equivalent to 16px */
+  margin-bottom: 1rem;
 }
 
 .profile-content .edit-profile {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem; /* Equivalent to 16px */
-}
-
-.profile-content .edit-button {
-  background-color: #0282c3;
-  color: white;
-  border: none;
-  border-radius: 0.25rem; /* Equivalent to 4px */
-  padding: 0.5rem; /* Equivalent to 8px */
-  cursor: pointer;
-  margin-top: 0.5rem; /* Equivalent to 8px */
+  margin-bottom: 1rem;
 }
 
 .profile-content ul {
@@ -211,23 +192,23 @@ body {
   list-style: none;
   padding: 0;
   text-align: left;
-  gap: 2rem; /* Equivalent to 32px */
+  gap: 2rem; 
 }
 
 .profile-content ul li {
-  margin-bottom: 0.625rem; /* Equivalent to 10px */
-  font-size: 1.5rem; /* Equivalent to 24px */
+  margin-bottom: 0.625rem;
+  font-size: 1.5rem; 
 }
 
 .profile-image {
-  width: 1.875rem; /* Equivalent to 30px */
-  height: 1.875rem; /* Equivalent to 30px */
+  width: 1.875rem;
+  height: 1.875rem; 
   border-radius: 50%;
 }
 
 .profile-image-large {
-  width: 13.125rem; /* Equivalent to 210px */
-  height: 13.125rem; /* Equivalent to 210px */
+  width: 13.125rem;
+  height: 13.125rem; 
   border-radius: 50%;
 }
 
@@ -254,10 +235,10 @@ body {
   background-color: #0282c3;
   color: white;
   border: none;
-  padding: 0.5rem; /* Equivalent to 8px */
-  border-radius: 0.25rem; /* Equivalent to 4px */
+  padding: 0.5rem;
+  border-radius: 0.25rem;
   cursor: pointer;
-  margin-top: 0.625rem; /* Equivalent to 10px */
+  margin-top: 0.625rem;
 }
 
 .logout-btn {
@@ -270,18 +251,60 @@ body {
 
 .booking-list {
   display: flex;
- justify-content: center; 
- align-items: center;
- gap: 0.5rem;
+  justify-content: center; 
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .favor-list {
   display: flex;
- justify-content: center; 
- align-items: center;
- gap: 0.5rem;
+  justify-content: center; 
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .favor-list:hover {
   color: #ff0000;
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column; 
+    align-items: flex-start; 
+  }
+
+  .nav-container img {
+    width: 8rem; 
+  }
+
+  .logins {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1rem; 
+  }
+
+  ul {
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 1rem;
+  }
+
+  .profile-content {
+    width: 90%; 
+    left: 0;
+  }
+
+  .profile-content h2 {
+    text-align: center; 
+  }
+}
+
+@media (max-width: 480px) {
+  .user-name {
+    font-size: 1.4rem; 
+  }
+
+  .logout-btn, .close-btn {
+    font-size: 0.9rem; 
+  }
 }

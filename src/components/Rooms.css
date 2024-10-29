@@ -20,7 +20,7 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    width: 30%;
+    width: calc(25% - 2rem); 
     overflow: hidden;
     transition: transform 0.3s;
 }
@@ -94,23 +94,7 @@ ul {
     background-color: #0282c3;
 }
 
-/* .button {
-    display: block;
-    width: 20%;
-    height: 3rem;
-    background-color: rgb(255, 255, 255);
-    color: #000000;
-    font-size: 1rem;
-    font-weight: bold;
-    border: 0.1rem solid #000000;
-    border-radius: 0.9rem;
-    cursor: pointer;
-    text-align: center;
-    line-height: 3rem;
-    transition: background-color 0.3s;
-} */
 .btn {
-    /* display: block; */
     display: flex;
     align-content: center;
     flex-wrap: wrap;
@@ -144,7 +128,7 @@ ul {
 
 .lines h2 {
     width: 60%;
-    display: flex;
+    display: flex; 
     font-size: 3rem;
 }
 
@@ -177,9 +161,6 @@ ul {
 }
 
 .modal-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 2rem;
     display: flex;
     flex-direction: column;
 }
@@ -195,196 +176,66 @@ ul {
     color: #333; 
     font-size: 3rem; 
     cursor: pointer; 
-    transition: color 0.3s, transform 0.2s; 
-  }
-  
-  .modal-close:hover {
-    color: #0004ff; 
-    transform: scale(1.1); 
-  }
-  
-  .modal-close:focus {
-    outline: none; 
-  }
-  
+    transition: color 0.3s;
+    position: absolute; 
+    top: 1rem; 
+    right: 1rem; 
+}
 
-.main-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+.modal-close:hover {
+    color: #0282c3; 
 }
 
 .additional-images-grid {
-    display: grid;
-    width: 68%;
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 0.5rem;
+    display: flex;
+    gap: 1rem; 
+    flex-wrap: wrap;
 }
 
 .additional-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
+    width: 100%; 
+    height: auto; 
+    border-radius: 5px; 
 }
 
-
-.room-info-main {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: space-between; 
-    align-items: flex-start;
-    gap: 2rem; 
-    padding: 2rem;
+@media (max-width: 1200px) {
+    .room-card {
+        width: calc(33.33% - 2rem); 
+    }
 }
 
-/* .room-info {
-    flex: 1 1 45%; 
-    min-width: 300px; 
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-} */
+@media (max-width: 768px) {
+    .room-card {
+        width: calc(50% - 2rem); 
+    }
 
-.bookings {
-    margin-top: 2rem;
-    background-color: #6666660e;
-    padding: 2rem;
-    border-radius: 2rem;
+    .rooms-container {
+        flex-direction: column; 
+        padding: 1rem; 
+    }
+
+    .modal-content {
+        width: 100%; 
+        height: auto; 
+        padding: 1rem; 
+    }
+
+    .modal-images {
+        flex-direction: column; 
+        align-items: center; 
+    }
 }
 
-.booking-dates,
-.guest-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
+@media (max-width: 480px) {
+    .room-card {
+        width: 100%; 
+    }
 
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
+    .name h4 {
+        font-size: 1.2rem; 
+    }
 
-input[type="date"],
-input[type="number"] {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    .bed h5 {
+        font-size: 1rem; 
+    }
 }
-
-.note {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 1rem 0;
-}
-
-.btn {
-    display: block;
-    width: 100%;
-    background-color: #0282c3;
-    color: white;
-    text-align: center;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #026499;
-}
-
-.ama-icons {
-    position: absolute;
-    background-color: #fff4f4a4;
-    padding: 0.7rem;
-    display: flex;
-    justify-content: flex-end; 
-    gap: 1rem; 
-    margin-top: 1rem; 
-    border-radius: 2rem;
-}
-
-.share-icon {
-    font-size: 2.2rem;
-    cursor: pointer;
-    color: #002fffc7;
-    transition: color 0.3s ease;
-}
-
-.share-icon:hover {
-    color: #ff0000;
-}
-
-.heart-icon {
-    font-size: 2.2rem;
-    cursor: pointer;
-    color: #002fffc7; 
-    transition: color 0.3s ease;
-}
-
-.heart-icon:hover {
-    color: #ff0000;
-}
-
-.user-bookings {
-    margin: 20px 0;
-  }
-  
-  .user-bookings h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .booking-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-  }
-  
-  .booking-table th, 
-  .booking-table td {
-    padding: 12px 15px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  .booking-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-    color: #555;
-  }
-  
-  .booking-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .booking-table tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .booking-table td {
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .booking-table th,
-  .booking-table td {
-    text-align: left;
-    padding: 10px;
-  }
-  
-  .booking-table tbody td:last-child {
-    font-weight: bold;
-  }
-  
-  p {
-    color: #777;
-    font-size: 1rem;
-    text-align: center;
-  }
-  

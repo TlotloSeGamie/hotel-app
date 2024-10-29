@@ -175,17 +175,16 @@
     font-size: 3rem; 
     cursor: pointer; 
     transition: color 0.3s, transform 0.2s; 
-  }
+}
   
-  .modal-close:hover {
+.modal-close:hover {
     color: #0004ff; 
     transform: scale(1.1); 
-  }
+}
   
-  .modal-close:focus {
+.modal-close:focus {
     outline: none; 
-  }
-  
+}
 
 .main-image img {
     width: 100%;
@@ -206,7 +205,6 @@
     border-radius: 0.5rem;
 }
 
-
 .room-info-main {
     width: 100%;
     height: auto;
@@ -216,15 +214,6 @@
     gap: 2rem; 
     padding: 2rem;
 }
-
-/* .room-info {
-    flex: 1 1 45%; 
-    min-width: 300px; 
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-} */
 
 .bookings {
     margin-top: 2rem;
@@ -293,6 +282,40 @@ input[type="number"] {
     color: #0282c3; 
 }
 
-/* .heart-icon {
-    color: #e63946; 
-} */
+@media (max-width: 768px) {
+    .room-card {
+        width: 100%; 
+    }
+
+    .modal-content {
+        width: 90%; 
+        padding: 1rem; 
+    }
+
+    .modal-body {
+        flex-direction: column; 
+    }
+
+    .room-info-main {
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    .main-image img {
+        border-radius: 0; 
+    }
+
+    .additional-images-grid {
+        width: 100%; 
+    }
+}
+
+@media (min-width: 769px) {
+    .modal-body {
+        grid-template-columns: 1fr 1fr; 
+    }
+
+    .room-info-main {
+        flex-direction: row; 
+    }
+}

@@ -1,39 +1,28 @@
+.checkout-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    justify-content: space-between;
+    background-color: rgb(253, 253, 255);
+}
 
 .checkout-container {
     margin-top: 2rem;
     gap: 3rem;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Stack the items vertically for smaller screens */
+    align-items: center; /* Center content */
     background-color: rgb(253, 253, 255);
-}
-
-.date-selection {
-    padding: 2rem;
-}
-
-.checkout-page {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; 
-    /* display: flex; */
-    justify-content: space-between;
-    background-color: rgb(253, 253, 255);
-}
-
-.checkout-container {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
+    width: 90%; /* Full width with some margin on smaller screens */
     max-width: 80rem; 
-    margin: 2rem auto; 
-    background-color: rgb(253, 253, 255);
     padding: 2rem;
     border-radius: 1rem; 
-    /* box-shadow: 0px 0.25rem 0.75rem rgba(0, 0, 0, 0.1);  */
+    box-shadow: 0px 0.25rem 0.75rem rgba(0, 0, 0, 0.1);  
     font-family: 'Arial', sans-serif;
 }
 
 .room-details {
+    width: 100%; /* Make room details full width */
     margin-bottom: 2rem; 
 }
 
@@ -47,7 +36,37 @@
     margin: 0.5rem 0; 
 }
 
-.checkout-container .complete-btn {
+.guest-container {
+    display: flex;
+    flex-direction: column; /* Stack select elements vertically */
+    gap: 1rem; /* Add space between select elements */
+    width: 100%; /* Full width */
+}
+
+.guest-input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    width: 100%;
+}
+
+.date-selection {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column; /* Stack date inputs vertically */
+    gap: 1rem; /* Space between inputs */
+    width: 100%; /* Full width */
+}
+
+.date-selection label {
+    margin-bottom: 0.5rem;
+}
+
+.booking-section {
+    width: 100%; /* Full width */
+}
+
+.complete-btn {
     width: 100%;
     padding: 1rem;
     background-color: #223ffc;
@@ -59,7 +78,7 @@
     transition: background-color 0.3s ease;
 }
 
-.checkout-container .complete-btn:hover {
+.complete-btn:hover {
     background-color: #0012a0;
 }
 
@@ -71,7 +90,7 @@
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 0.3rem;
-    width: 100%;
+    width: 100%; /* Full width */
     margin-bottom: 1rem; 
 }
 
@@ -80,4 +99,21 @@
     align-items: center;
     gap: 0.3rem;
     margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+    .checkout-container {
+        flex-direction: row; 
+        justify-content: space-between;
+    }
+
+    .guest-container,
+    .booking-section {
+        flex: 1; 
+        margin: 0 1rem;
+    }
+
+    .room-details {
+        flex: 2; 
+    }
 }
