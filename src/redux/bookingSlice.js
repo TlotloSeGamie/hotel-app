@@ -200,7 +200,12 @@ export const fetchDataFirestore=async(dispatch)=>{
 
   export const addBookingToFirestore = ( bookingDetails) => async (dispatch) => {
 
-    const uid = auth.currentUser.uid;
+    const uid = auth.currentUser?.uid; // Optional chaining to prevent accessing uid if auth.currentUser is null
+if (!uid) {
+    console.error("User is not authenticated.");
+    return; // or handle the case where the user is not authenticated
+}
+
     console.log(uid)
     
     dispatch(setLoading());
@@ -246,7 +251,12 @@ export const fetchBookingToFirestore =  () => async (dispatch) => {
 };
 
 export const addLikedRooms = ( bookingDetails) => async (dispatch) => {
-    const uid = auth.currentUser.uid;
+    const uid = auth.currentUser?.uid; // Optional chaining to prevent accessing uid if auth.currentUser is null
+if (!uid) {
+    console.error("User is not authenticated.");
+    return; // or handle the case where the user is not authenticated
+}
+
     console.log(uid)
     
     dispatch(setLoading());
@@ -256,7 +266,7 @@ export const addLikedRooms = ( bookingDetails) => async (dispatch) => {
           
             ...bookingDetails
         });
-        console.log(bookingDetails);
+        console.log("liked", bookingDetails);
         
         dispatch(setData({  uid, docId: bookingRef.id }));
     } catch (error) {
@@ -267,7 +277,12 @@ export const addLikedRooms = ( bookingDetails) => async (dispatch) => {
 };
 
 export const fetchLikedRooms =  () => async (dispatch) => {
-    const uid = auth.currentUser.uid;
+    const uid = auth.currentUser?.uid; 
+if (!uid) {
+    console.error("User is not authenticated.");
+    return; 
+}
+
     
     dispatch(setLoading());
    
@@ -283,6 +298,8 @@ export const fetchLikedRooms =  () => async (dispatch) => {
             }))
        
             dispatch(setUserLikedRooms(userBookings));
+            console.log('like"', userBookings);
+            
             
     } catch (error) {
         dispatch(setError(error.message));

@@ -50,6 +50,9 @@ const Navbar = () => {
     if (storedLikedRooms) {
       // setLikedRooms(JSON.parse(storedLikedRooms));
       console.log("Liked rooms fetched from localStorage:", JSON.parse(storedLikedRooms));
+      console.log('liked', fetchLikedRooms);
+      
+
     }
   }, [dispatch]);
 
@@ -217,8 +220,8 @@ const Navbar = () => {
                           <h3>Your Liked Rooms:</h3>
                           {Array.isArray(userBookings) && userBookings.length > 0 ? (
                             <ul>
-                              {console.log("Liked rooms to be displayed:", likedRooms)} 
-                              {likedRooms.map((booking) => (
+                              {console.log("Liked rooms to be displayed:", userBookings)} 
+                              {userBookings.map((booking) => (
                                 <li key={booking.roomDetails.roomId}>{booking.roomDetails.name}</li>
                               ))}
                               
